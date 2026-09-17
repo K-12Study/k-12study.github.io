@@ -1,10 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>K-12 Study</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      K-12 Study
+    </title>
+    <style>
+      :root {
+            --bg-color: #121214;
+            --text-color: #ffffff;
+            --accent-color: #4f46e5;
+            --accent-hover: #4338ca;
+            --danger-color: #ef4444;
+            --danger-hover: #dc2626;
+            --card-bg: #1e1e24;
+        }
+        body {
+            font-family: &#39;Segoe UI&#39;, Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* Button Styling */
+        .play-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+            margin-bottom: 30px;
+        }
+        .play-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        .play-btn:active {
+            transform: translateY(1px);
+        }
+        /* Close Button Styling */
+        .close-btn {
+            background-color: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-bottom: 15px;
+            align-self: flex-end; /* Aligns button to the top right of the wrapper */
+        }
+        .close-btn:hover {
+            background-color: var(--danger-hover);
+        }
+        /* Game Frame Wrapper */
+        .game-wrapper {
+            display: none; /* Hidden until button is clicked */
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            margin-bottom: 50px;
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 6px;
+        }
+    </style>
   </head>
   <body>
-    <h1>This site is for people studying in grades K-12. Follow our ToS!</h1>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <header>
+      <h1>
+        K-12 Study
+      </h1>
+    </header>
+    <div class="container">
+      <!-- Button to trigger the game -->
+      <button class="play-btn" id="loadGameBtn">
+        Divison Run 
+      </button>
+      <!-- Game container wrapper -->
+      <div class="game-wrapper" id="gameWrapper" style="display: none;">
+        <!-- New Close Button -->
+        <button class="close-btn" id="closeGameBtn">
+          Close Game
+        </button>
+        <div class="iframe-container">
+          <iframe id="gameFrame" allowfullscreen="" scrolling="no">
+          </iframe>
+        </div>
+      </div>
+    </div>
+    <script>
+      const loadGameBtn = document.getElementById(&#39;loadGameBtn&#39;);
+        const closeGameBtn = document.getElementById(&#39;closeGameBtn&#39;);
+        const gameWrapper = document.getElementById(&#39;gameWrapper&#39;);
+        const gameFrame = document.getElementById(&#39;gameFrame&#39;);
+
+        loadGameBtn.addEventListener(&#39;click&#39;, () =&gt; {
+            gameFrame.src = &#34;https://chompypotato.github.io/run3/&#34;;
+            gameWrapper.style.display = &#34;flex&#34;; // Reveals container
+            loadGameBtn.style.display = &#34;none&#34;; // Hides play button
+            gameWrapper.scrollIntoView({ behavior: &#39;smooth&#39; });
+        });
+
+        closeGameBtn.addEventListener(&#39;click&#39;, () =&gt; {
+            gameFrame.src = &#34;&#34;; // Stops the game audio/loading instantly
+            gameWrapper.style.display = &#34;none&#34;; // Hides container
+            loadGameBtn.style.display = &#34;inline-block&#34;; // Brings back play button
+            window.scrollTo({ top: 0, behavior: &#39;smooth&#39; }); // Scrolls back to top smoothly
+        });
+    </script>
   </body>
 </html>
