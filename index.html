@@ -1,164 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      K-12 Study
-    </title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-12 Study</title>
     <style>
-      :root {
-            --bg-color: #121214;
-            --text-color: #ffffff;
-            --accent-color: #4f46e5;
-            --accent-hover: #4338ca;
-            --danger-color: #ef4444;
-            --danger-hover: #dc2626;
-            --card-bg: #1e1e24;
-        }
         body {
-            font-family: &#39;Segoe UI&#39;, Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-        }
-        header {
-            width: 100%;
-            padding: 20px 0;
-            text-align: center;
-            background-color: var(--card-bg);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            margin-bottom: 40px;
-        }
-        h1 {
+            justify-content: center;
+            height: 100vh;
             margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 1px;
+            overflow: hidden;
         }
         .container {
-            width: 90%;
-            max-width: 1000px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
-        /* Button Styling */
-        .play-btn {
-            background-color: var(--accent-color);
-            color: white;
+        .btn {
+            background-color: #4CAF50;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.25rem;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
-            margin-bottom: 30px;
-        }
-        .play-btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-        }
-        .play-btn:active {
-            transform: translateY(1px);
-        }
-        /* Close Button Styling */
-        .close-btn {
-            background-color: var(--danger-color);
             color: white;
-            border: none;
-            padding: 10px 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 6px;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
             cursor: pointer;
-            transition: background-color 0.2s;
-            margin-bottom: 15px;
-            align-self: flex-end; /* Aligns button to the top right of the wrapper */
+            border-radius: 4px;
         }
-        .close-btn:hover {
-            background-color: var(--danger-hover);
+        .btn-danger {
+            background-color: #f44336;
         }
-        /* Game Frame Wrapper */
-        .game-wrapper {
-            display: none; /* Hidden until button is clicked */
-            width: 100%;
-            max-width: 800px;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            margin-bottom: 50px;
-            padding: 15px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
+        .hidden {
+            display: none !important;
         }
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-        }
-        .iframe-container iframe {
-            position: absolute;
+        #game-container {
+            position: fixed;
             top: 0;
             left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+        }
+        #game-container iframe {
+            flex-grow: 1;
+            border: none;
             width: 100%;
             height: 100%;
+        }
+        .controls {
+            padding: 10px;
+            background-color: #222;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .lock-screen {
+            background-color: #000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        .lock-screen input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border-radius: 4px;
             border: none;
-            border-radius: 6px;
         }
     </style>
-  </head>
-  <body>
-    <header>
-      <h1>
-        K-12 Study
-      </h1>
-    </header>
-    <div class="container">
-      <!-- Button to trigger the game -->
-      <button class="play-btn" id="loadGameBtn">
-        Divison Run 
-      </button>
-      <!-- Game container wrapper -->
-      <div class="game-wrapper" id="gameWrapper" style="display: none;">
-        <!-- New Close Button -->
-        <button class="close-btn" id="closeGameBtn">
-          Close Game
-        </button>
-        <div class="iframe-container">
-          <iframe id="gameFrame" allowfullscreen="" scrolling="no">
-          </iframe>
-        </div>
-      </div>
+</head>
+<body>
+
+    <div id="lock-screen" class="lock-screen hidden">
+        <h2>This site is locked during school hours.</h2>
+        <p>Enter password to unlock:</p>
+        <input type="password" id="password-input" placeholder="Password">
+        <button class="btn" onclick="checkPassword()">Unlock</button>
+        <p id="error-msg" style="color: red; margin-top: 10px;"></p>
     </div>
+
+    <div class="container" id="main-content">
+        <h1>K-12 Study</h1>
+        <button class="btn" onclick="openGame()">Play Run 3</button>
+    </div>
+
+    <div id="game-container" class="hidden">
+        <div class="controls">
+            <button class="btn btn-danger" onclick="closeGame()">Close Game</button>
+        </div>
+        <iframe id="game-frame" src=""></iframe>
+    </div>
+
     <script>
-      const loadGameBtn = document.getElementById(&#39;loadGameBtn&#39;);
-        const closeGameBtn = document.getElementById(&#39;closeGameBtn&#39;);
-        const gameWrapper = document.getElementById(&#39;gameWrapper&#39;);
-        const gameFrame = document.getElementById(&#39;gameFrame&#39;);
+        const CORRECT_PASSWORD = "deal1358";
 
-        loadGameBtn.addEventListener(&#39;click&#39;, () =&gt; {
-            gameFrame.src = &#34;https://chompypotato.github.io/run3/&#34;;
-            gameWrapper.style.display = &#34;flex&#34;; // Reveals container
-            loadGameBtn.style.display = &#34;none&#34;; // Hides play button
-            gameWrapper.scrollIntoView({ behavior: &#39;smooth&#39; });
-        });
+        function checkTimeAndLock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const currentTimeInMinutes = (hours * 60) + minutes;
+            const startTime = 465; 
+            const endTime = 885;
 
-        closeGameBtn.addEventListener(&#39;click&#39;, () =&gt; {
-            gameFrame.src = &#34;&#34;; // Stops the game audio/loading instantly
-            gameWrapper.style.display = &#34;none&#34;; // Hides container
-            loadGameBtn.style.display = &#34;inline-block&#34;; // Brings back play button
-            window.scrollTo({ top: 0, behavior: &#39;smooth&#39; }); // Scrolls back to top smoothly
-        });
+            if (currentTimeInMinutes >= startTime && currentTimeInMinutes <= endTime) {
+                if (sessionStorage.getItem("unlocked") !== "true") {
+                    document.getElementById("lock-screen").classList.remove("hidden");
+                }
+            }
+        }
+
+        function checkPassword() {
+            const userInput = document.getElementById("password-input").value;
+            const errorMsg = document.getElementById("error-msg");
+
+            if (userInput === CORRECT_PASSWORD) {
+                sessionStorage.setItem("unlocked", "true");
+                document.getElementById("lock-screen").classList.add("hidden");
+            } else {
+                errorMsg.innerText = "Incorrect password. Try again.";
+            }
+        }
+
+        function openGame() {
+            const iframe = document.getElementById("game-frame");
+            iframe.src = "https://chompypotato.github.io/run3/";
+            document.getElementById("game-container").classList.remove("hidden");
+        }
+
+        function closeGame() {
+            const iframe = document.getElementById("game-frame");
+            iframe.src = ""; 
+            document.getElementById("game-container").classList.add("hidden");
+        }
+
+        checkTimeAndLock();
     </script>
-  </body>
+</body>
 </html>
+
