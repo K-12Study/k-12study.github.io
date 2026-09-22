@@ -97,14 +97,15 @@
 
     <div class="container" id="main-content">
         <h1>K-12 Study</h1>
-        <button class="btn" onclick="openGame()">Play Run 3x3</button>
+        <button class="btn" onclick="openGame('run')">Play Run 3x3</button>
+        <button class="btn" onclick="openGame('gd')">Play Geometry Dash</button>
     </div>
 
     <div id="game-container" class="hidden">
         <div class="controls">
-            <button class="btn btn-danger" onclick="closeGame()">Close Run 3x3</button>
+            <button class="btn btn-danger" onclick="closeGame()">Close Game</button>
         </div>
-        <iframe id="game-frame" src=""></iframe>
+        <iframe id="game-frame" src="" allowtransparency="true" scrolling="no" allowfullscreen></iframe>
     </div>
 
     <script>
@@ -137,9 +138,13 @@
             }
         }
 
-        function openGame() {
+        function openGame(gameType) {
             const iframe = document.getElementById("game-frame");
-            iframe.src = "https://chompypotato.github.io/run3/";
+            if (gameType === 'run') {
+                iframe.src = "https://chompypotato.github.io/run3/";
+            } else if (gameType === 'gd') {
+                iframe.src = "https://scratch.mit.edu/projects/200138085/embed";
+            }
             document.getElementById("game-container").classList.remove("hidden");
         }
 
@@ -153,4 +158,3 @@
     </script>
 </body>
 </html>
-
