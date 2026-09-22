@@ -1,160 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-12 Study</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-        .container {
-            text-align: center;
-        }
-        .btn {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .btn-danger {
-            background-color: #f44336;
-        }
-        .hidden {
-            display: none !important;
-        }
-        #game-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: black;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-        }
-        #game-container iframe {
-            flex-grow: 1;
-            border: none;
-            width: 100%;
-            height: 100%;
-        }
-        .controls {
-            padding: 10px;
-            background-color: #222;
-            display: flex;
-            justify-content: flex-end;
-        }
-        .lock-screen {
-            background-color: #000;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-        .lock-screen input {
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: none;
-        }
-    </style>
+<link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-12 Study</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #121212;
+color: #ffffff;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+margin: 0;
+overflow: hidden;
+}
+.navbar {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 60px;
+background-color: #1e1e1e;
+display: flex;
+align-items: center;
+padding: 0 20px;
+box-sizing: border-box;
+border-bottom: 1px solid #333;
+z-index: 999;
+}
+.nav-logo {
+height: 35px;
+width: 35px;
+margin-right: 20px;
+}
+.nav-link {
+color: #ffffff;
+text-decoration: none;
+font-size: 16px;
+font-weight: bold;
+}
+.nav-link:hover {
+color: #4CAF50;
+}
+.container {
+text-align: center;
+margin-top: 60px;
+}
+.btn {
+background-color: #4CAF50;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+border-radius: 4px;
+}
+.btn-danger {
+background-color: #f44336;
+}
+.hidden {
+display: none !important;
+}
+#game-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background-color: black;
+z-index: 9999;
+display: flex;
+flex-direction: column;
+}
+#game-container iframe {
+flex-grow: 1;
+border: none;
+width: 100%;
+height: 100%;
+}
+.controls {
+padding: 10px;
+background-color: #222;
+display: flex;
+justify-content: flex-end;
+}
+.lock-screen {
+background-color: #000;
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+z-index: 10000;
+}
+.lock-screen input {
+padding: 10px;
+font-size: 16px;
+margin-bottom: 10px;
+border-radius: 4px;
+border: none;
+}
+</style>
 </head>
 <body>
 
-    <div id="lock-screen" class="lock-screen hidden">
-        <h2>This site is locked during school hours.</h2>
-        <p>Enter password to unlock:</p>
-        <input type="password" id="password-input" placeholder="Password">
-        <button class="btn" onclick="checkPassword()">Unlock</button>
-        <p id="error-msg" style="color: red; margin-top: 10px;"></p>
-    </div>
+<div class="navbar">
+<img class="nav-logo" src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico" alt="Logo">
+<a class="nav-link" href="https://k-12study.github.io/contact">Contact</a>
+</div>
 
-    <div class="container" id="main-content">
-        <h1>K-12 Study</h1>
-        <button class="btn" onclick="openGame('run')">Play Run 3x3</button>
-        <button class="btn" onclick="openGame('gd')">Play Geometry Dash</button>
-    </div>
+<div id="lock-screen" class="lock-screen hidden">
+<h2>This site is locked during school hours.</h2>
+<p>Enter password to unlock:</p>
+<input type="password" id="password-input" placeholder="Password">
+<button class="btn" onclick="checkPassword()">Unlock</button>
+<p id="error-msg" style="color: red; margin-top: 10px;"></p>
+</div>
 
-    <div id="game-container" class="hidden">
-        <div class="controls">
-            <button class="btn btn-danger" onclick="closeGame()">Close Game</button>
-        </div>
-        <iframe id="game-frame" src="" allowtransparency="true" scrolling="no" allowfullscreen></iframe>
-    </div>
+<div class="container" id="main-content">
+<h1>K-12 Study</h1>
+<button class="btn" onclick="openGame('run')">Play Run 3x3</button>
+<button class="btn" onclick="openGame('gd')">Play Geometry Dash</button>
+</div>
 
-    <script>
-        const CORRECT_PASSWORD = "123456";
+<div id="game-container" class="hidden">
+<div class="controls">
+<button class="btn btn-danger" onclick="closeGame()">Close Game</button>
+</div>
+<iframe id="game-frame" src="" allowtransparency="true" scrolling="no" allowfullscreen></iframe>
+</div>
 
-        function checkTimeAndLock() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const currentTimeInMinutes = (hours * 60) + minutes;
-            const startTime = 465; 
-            const endTime = 885;
+<script>
+const CORRECT_PASSWORD = "123456";
 
-            if (currentTimeInMinutes >= startTime && currentTimeInMinutes <= endTime) {
-                if (sessionStorage.getItem("unlocked") !== "true") {
-                    document.getElementById("lock-screen").classList.remove("hidden");
-                }
-            }
-        }
+function checkTimeAndLock() {
+const now = new Date();
+const hours = now.getHours();
+const minutes = now.getMinutes();
+const currentTimeInMinutes = (hours * 60) + minutes;
+const startTime = 465;
+const endTime = 885;
 
-        function checkPassword() {
-            const userInput = document.getElementById("password-input").value;
-            const errorMsg = document.getElementById("error-msg");
+if (currentTimeInMinutes >= startTime && currentTimeInMinutes <= endTime) {
+if (sessionStorage.getItem("unlocked") !== "true") {
+document.getElementById("lock-screen").classList.remove("hidden");
+}
+}
+}
 
-            if (userInput === CORRECT_PASSWORD) {
-                sessionStorage.setItem("unlocked", "true");
-                document.getElementById("lock-screen").classList.add("hidden");
-            } else {
-                errorMsg.innerText = "Incorrect password. Try again.";
-            }
-        }
+function checkPassword() {
+const userInput = document.getElementById("password-input").value;
+const errorMsg = document.getElementById("error-msg");
 
-        function openGame(gameType) {
-            const iframe = document.getElementById("game-frame");
-            if (gameType === 'run') {
-                iframe.src = "https://chompypotato.github.io/run3/";
-            } else if (gameType === 'gd') {
-                iframe.src = "https://scratch.mit.edu/projects/200138085/embed";
-            }
-            document.getElementById("game-container").classList.remove("hidden");
-        }
+if (userInput === CORRECT_PASSWORD) {
+sessionStorage.setItem("unlocked", "true");
+document.getElementById("lock-screen").classList.add("hidden");
+} else {
+errorMsg.innerText = "Incorrect password. Try again.";
+}
+}
 
-        function closeGame() {
-            const iframe = document.getElementById("game-frame");
-            iframe.src = ""; 
-            document.getElementById("game-container").classList.add("hidden");
-        }
+function openGame(gameType) {
+const iframe = document.getElementById("game-frame");
+if (gameType === 'run') {
+iframe.src = "https://chompypotato.github.io/run3/";
+} else if (gameType === 'gd') {
+iframe.src = "https://scratch.mit.edu/projects/200138085/embed";
+}
+document.getElementById("game-container").classList.remove("hidden");
+}
 
-        checkTimeAndLock();
-    </script>
+function closeGame() {
+const iframe = document.getElementById("game-frame");
+iframe.src = "";
+document.getElementById("game-container").classList.add("hidden");
+}
+
+checkTimeAndLock();
+</script>
 </body>
 </html>
