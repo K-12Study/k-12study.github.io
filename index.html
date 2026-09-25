@@ -1,223 +1,695 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico"">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-12 Study</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 60px;
-            background-color: #1e1e1e;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            box-sizing: border-box;
-            border-bottom: 1px solid #333;
-            z-index: 999;
-        }
-        .nav-logo {
-            height: 35px;
-            width: 35px;
-            margin-right: 20px;
-        }
-        .nav-link {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .nav-link:hover {
-            color: #4CAF50;
-        }
-        .container {
-            text-align: center;
-            margin-top: 60px;
-            width: 90%;
-            max-width: 800px;
-        }
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-        @media (max-width: 500px) {
-            .game-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        .btn {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background-color 0.2s;
-        }
-        .btn:hover {
-            background-color: #45a049;
-        }
-        .btn-danger {
-            background-color: #f44336;
-        }
-        .btn-danger:hover {
-            background-color: #da190b;
-        }
-        .hidden {
-            display: none !important;
-        }
-        #game-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: black;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-        }
-        #game-container iframe {
-            flex-grow: 1;
-            border: none;
-            width: 100%;
-            height: 100%;
-        }
-        .controls {
-            padding: 10px;
-            background-color: #222;
-            display: flex;
-            justify-content: flex-end;
-        }
-        .lock-screen {
-            background-color: #000;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-        .lock-screen input {
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K-12 Study Games</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #181818;
+      color: white;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* =========================
+       LOGIN LOCK SCREEN
+       ========================= */
+
+    .lock-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: #181818;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-box {
+      width: 340px;
+      max-width: 90%;
+      background: #252525;
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    .login-box img {
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .login-box h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .login-box p {
+      color: #bbbbbb;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #181818;
+      color: white;
+      border: 1px solid #444;
+      border-radius: 7px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .login-box input:focus {
+      border-color: #777;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 12px;
+      background: #3a3a3a;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .login-button:hover {
+      background: #505050;
+    }
+
+    .login-error {
+      display: none;
+      color: #ff5555;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    /* =========================
+       TOP NAVIGATION BAR
+       ========================= */
+
+    .top-bar {
+      height: 64px;
+      width: 100%;
+      background: #111111;
+      display: flex;
+      align-items: center;
+      padding-left: 70px;
+      gap: 28px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .contact {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+
+    .contact:hover {
+      color: #aaaaaa;
+    }
+
+    /* =========================
+       GAMES
+       ========================= */
+
+    .games-area {
+      padding: 35px 0 0 70px;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 150px);
+      gap: 22px;
+    }
+
+    .game {
+      width: 150px;
+      height: 150px;
+      background: #252525;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+      overflow: hidden;
+    }
+
+    .game:hover {
+      transform: translateY(-4px);
+      background: #303030;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .game img {
+      width: 105px;
+      height: 105px;
+      object-fit: contain;
+    }
+
+    /* =========================
+       GAME OVERLAY
+       ========================= */
+
+    .game-overlay {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background: #555555;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .game-window {
+      position: relative;
+      width: 90vw;
+      height: 90vh;
+      background: #000000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header above iframe */
+
+    .game-header {
+      height: 45px;
+      min-height: 45px;
+      background: #222222;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 10px;
+    }
+
+    /* Close button */
+
+    .close-button {
+      background: transparent;
+      border: none;
+      color: red;
+      font-size: 27px;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+      padding: 3px 8px;
+      transition:
+        color 0.2s,
+        transform 0.2s;
+    }
+
+    .close-button:hover {
+      color: #ff5555;
+      transform: scale(1.1);
+    }
+
+    /* Iframe */
+
+    .game-window iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+      display: block;
+      background: black;
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 600px) {
+      .top-bar {
+        padding-left: 20px;
+        gap: 18px;
+      }
+
+      .games-area {
+        padding-left: 20px;
+      }
+
+      .games-grid {
+        grid-template-columns: repeat(2, 130px);
+      }
+
+      .game {
+        width: 130px;
+        height: 130px;
+      }
+
+      .game-window {
+        width: 95vw;
+        height: 90vh;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="navbar">
-        <img class="nav-logo" src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico"" alt="Logo">
-        <a class="nav-link" href="https://github.io">Contact Us</a>
+  <!-- =========================
+       LOGIN LOCK SCREEN
+       ========================= -->
+
+  <div id="lockScreen" class="lock-screen">
+
+    <div class="login-box">
+
+      <img
+        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico"
+        alt="K-12 Study Logo"
+      >
+
+      <h2>Site Locked</h2>
+
+      <p>
+        K-12 Study is currently locked.
+        <br>
+        Please log in to continue.
+      </p>
+
+      <input
+        id="username"
+        type="text"
+        placeholder="Username"
+        autocomplete="username"
+      >
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        autocomplete="current-password"
+      >
+
+      <button
+        class="login-button"
+        onclick="login()"
+      >
+        Login
+      </button>
+
+      <div
+        id="loginError"
+        class="login-error"
+      >
+        Incorrect username or password.
+      </div>
+
     </div>
 
-    <div id="lock-screen" class="lock-screen hidden">
-        <h2>Hint: 1****6</h2>
-        <p>Enter password to unlock:</p>
-        <input type="password" id="password-input" placeholder="Password">
-        <button class="btn" onclick="checkPassword()">Unlock</button>
-        <p id="error-msg" style="color: red; margin-top: 10px;"></p>
+  </div>
+
+
+  <!-- =========================
+       TOP BAR
+       ========================= -->
+
+  <nav class="top-bar">
+
+    <a
+      class="brand"
+      href="https://k-12study.github.io"
+    >
+
+      <img
+        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico"
+        alt="K-12 Study Logo"
+      >
+
+      <span>K-12 Study</span>
+
+    </a>
+
+    <a
+      class="contact"
+      href="https://k-12study.github.io/contact-us"
+    >
+      Contact Us
+    </a>
+
+  </nav>
+
+
+  <!-- =========================
+       GAMES
+       ========================= -->
+
+  <main class="games-area">
+
+    <div class="games-grid">
+
+      <!-- Geometry Dash -->
+
+      <div
+        class="game"
+        onclick="openGame('https://lolygames.github.io/gd-lit')"
+        title="Geometry Dash"
+      >
+
+        <img
+          src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Geometry_Dash_Icon.png"
+          alt="Geometry Dash"
+        >
+
+      </div>
+
+
+      <!-- Paper.io -->
+
+      <div
+        class="game"
+        onclick="openGame('https://the-pizza-editionfree.github.io/lesson305/lesson-412/')"
+        title="Baldi's"
+      >
+
+        <img
+          src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/unnamed.png"
+          alt="Baldi's Basics"
+        >
+
+      </div>
+
+
+      <!-- Subway Surfers -->
+
+      <div
+        class="game"
+        onclick="openGame('https://baldis-basics-online.github.io/g26/class-444/')"
+        title="Subway Surfers"
+      >
+
+        <img
+          src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Subway%20Surfers.png"
+          alt="Subway Surfers"
+        >
+
+      </div>
+
     </div>
 
-    <div class="container" id="main-content">
-        <h1>K-12 Study</h1>
-        <div class="game-grid">
-            <button class="btn" onclick="openGame('run')">Play Run 3x3</button>
-            <button class="btn" onclick="openGame('gd')">Play Geometry Dash</button>
-            <button class="btn" onclick="openGame('subway')">Play Subway Surfers</button>
-            <button class="btn" onclick="openGame('basketball')">Play Basketball Stars</button>
-        </div>
+  </main>
+
+
+  <!-- =========================
+       GAME POPUP
+       ========================= -->
+
+  <div
+    id="gameOverlay"
+    class="game-overlay"
+    onclick="closeGame(event)"
+  >
+
+    <div class="game-window">
+
+      <!-- X button is above the iframe -->
+
+      <div class="game-header">
+
+        <button
+          class="close-button"
+          onclick="closeGame()"
+          aria-label="Close"
+        >
+          X
+        </button>
+
+      </div>
+
+      <iframe
+        id="gameFrame"
+        src=""
+        allowfullscreen
+        allow="fullscreen; autoplay"
+      ></iframe>
+
     </div>
 
-    <div id="game-container" class="hidden">
-        <div class="controls">
-            <button class="btn btn-danger" onclick="closeGame()">Close Game</button>
-        </div>
-        <iframe id="game-frame" src="" allowtransparency="true" scrolling="no" allowfullscreen></iframe>
-    </div>
+  </div>
 
-    <script>
-        const CORRECT_PASSWORD = "123456";
 
-        function checkTimeAndLock() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const currentTimeInMinutes = (hours * 60) + minutes;
-            const startTime = 465;
-            const endTime = 885;
+  <script>
 
-            if (currentTimeInMinutes >= startTime && currentTimeInMinutes <= endTime) {
-                if (sessionStorage.getItem("unlocked") !== "true") {
-                    document.getElementById("lock-screen").classList.remove("hidden");
-                }
-            }
+    /* =========================
+       LOGIN SETTINGS
+       ========================= */
+
+    const CORRECT_USERNAME = "admin";
+    const CORRECT_PASSWORD = "123456";
+
+
+    /* =========================
+       CHECK LOCK TIME
+       ========================= */
+
+    function isLockedTime() {
+
+      const now = new Date();
+
+      const day = now.getDay();
+
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+
+      const currentMinutes =
+        hours * 60 + minutes;
+
+
+      /*
+        0 = Sunday
+        1 = Monday
+        2 = Tuesday
+        3 = Wednesday
+        4 = Thursday
+        5 = Friday
+        6 = Saturday
+      */
+
+      // Weekends are never locked.
+
+      if (day === 0 || day === 6) {
+        return false;
+      }
+
+
+      // 7:45 AM
+
+      const lockStart = 7 * 60 + 45;
+
+
+      // 2:45 PM
+
+      const lockEnd = 14 * 60 + 45;
+
+
+      return (
+        currentMinutes >= lockStart &&
+        currentMinutes < lockEnd
+      );
+    }
+
+
+    /* =========================
+       SHOW / HIDE LOCK SCREEN
+       ========================= */
+
+    function checkLock() {
+
+      const lockScreen =
+        document.getElementById("lockScreen");
+
+
+      if (isLockedTime()) {
+
+        lockScreen.style.display = "flex";
+
+      } else {
+
+        lockScreen.style.display = "none";
+      }
+    }
+
+
+    /* =========================
+       LOGIN
+       ========================= */
+
+    function login() {
+
+      const username =
+        document.getElementById("username").value;
+
+      const password =
+        document.getElementById("password").value;
+
+      const error =
+        document.getElementById("loginError");
+
+
+      if (
+        username === CORRECT_USERNAME &&
+        password === CORRECT_PASSWORD
+      ) {
+
+        document.getElementById("lockScreen")
+          .style.display = "none";
+
+        error.style.display = "none";
+
+      } else {
+
+        error.style.display = "block";
+      }
+    }
+
+
+    /* =========================
+       ENTER KEY LOGIN
+       ========================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Enter" &&
+          document.getElementById("lockScreen")
+            .style.display === "flex"
+        ) {
+
+          login();
         }
 
-        function checkPassword() {
-            const userInput = document.getElementById("password-input").value;
-            const errorMsg = document.getElementById("error-msg");
+      }
+    );
 
-            if (userInput === CORRECT_PASSWORD) {
-                sessionStorage.setItem("unlocked", "true");
-                document.getElementById("lock-screen").classList.add("hidden");
-            } else {
-                errorMsg.innerText = "Incorrect password. Try again.";
-            }
+
+    /* =========================
+       GAME FUNCTIONS
+       ========================= */
+
+    function openGame(url) {
+
+      const overlay =
+        document.getElementById("gameOverlay");
+
+      const iframe =
+        document.getElementById("gameFrame");
+
+      iframe.src = url;
+
+      overlay.style.display = "flex";
+    }
+
+
+    function closeGame(event) {
+
+      /*
+        Only close when clicking
+        the gray area outside the game.
+      */
+
+      if (
+        event &&
+        event.target !==
+          document.getElementById("gameOverlay")
+      ) {
+
+        return;
+      }
+
+
+      const overlay =
+        document.getElementById("gameOverlay");
+
+      const iframe =
+        document.getElementById("gameFrame");
+
+      iframe.src = "";
+
+      overlay.style.display = "none";
+    }
+
+
+    /* =========================
+       ESCAPE KEY
+       ========================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Escape") {
+
+          closeGame();
         }
 
-        function openGame(gameType) {
-            const iframe = document.getElementById("game-frame");
+      }
+    );
 
-            if (gameType === 'run') {
-                iframe.src = "https://chompypotato.github.io/run3/";
-            } else if (gameType === 'gd') {
-                iframe.src = "https://lolygames.github.io/gd-lit/";
-            } else if (gameType === 'subway') {
-                iframe.src = "https://baldis-basics-online.github.io/g26/class-444/";
-            } else if (gameType === 'basketball') {
-                iframe.src = "https://baldis-basics-online.github.io/g5/class-449/";
-            }
 
-            document.getElementById("game-container").classList.remove("hidden");
-        }
+    /* =========================
+       INITIAL LOCK CHECK
+       ========================= */
 
-        function closeGame() {
-            const iframe = document.getElementById("game-frame");
-            iframe.src = "";
-            document.getElementById("game-container").classList.add("hidden");
-        }
+    checkLock();
 
-        checkTimeAndLock();
-    </script>
+
+    /*
+      Check every 30 seconds so the
+      lock status updates automatically.
+    */
+
+    setInterval(
+      checkLock,
+      30000
+    );
+
+  </script>
+
 </body>
 </html>
+
