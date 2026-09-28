@@ -117,10 +117,7 @@ body {
 
 .games-grid {
   display: grid;
-
-  /* 3 games per row */
   grid-template-columns: repeat(3, 150px);
-
   gap: 22px;
 }
 
@@ -425,12 +422,35 @@ body {
 <script>
 
 /* =========================
-   LOGIN
+   LOGIN SETTINGS
 ========================= */
 
 const CORRECT_USERNAME = "admin";
 const CORRECT_PASSWORD = "123456";
 
+
+/* =========================
+   GET TODAY'S DATE
+========================= */
+
+function getTodayKey() {
+
+  const now = new Date();
+
+  return (
+    now.getFullYear() +
+    "-" +
+    String(now.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(now.getDate()).padStart(2, "0")
+  );
+
+}
+
+
+/* =========================
+   CHECK LOCKED TIME
+========================= */
 
 function isLockedTime() {
 
@@ -454,9 +474,7 @@ function isLockedTime() {
 
 
   /* Monday-Friday:
-     Locked from 7:45 AM
-     until 2:45 PM
-  */
+     7:45 AM through 2:45 PM */
 
   const lockStart =
     7 * 60 + 45;
@@ -469,14 +487,52 @@ function isLockedTime() {
     currentMinutes >= lockStart &&
     currentMinutes < lockEnd
   );
+
 }
 
+
+/* =========================
+   CHECK IF ALREADY LOGGED
+   IN TODAY
+========================= */
+
+function hasLoggedInToday() {
+
+  return (
+    localStorage.getItem("k12LoginDate") ===
+    getTodayKey()
+  );
+
+}
+
+
+/* =========================
+   CHECK LOCK SCREEN
+========================= */
 
 function checkLock() {
 
   const lockScreen =
     document.getElementById("lockScreen");
 
+
+  /*
+    If the user already logged in
+    today, keep the site unlocked.
+  */
+
+  if (hasLoggedInToday()) {
+
+    lockScreen.style.display = "none";
+
+    return;
+  }
+
+
+  /*
+    Otherwise, show the login
+    during the locked school hours.
+  */
 
   if (isLockedTime()) {
 
@@ -490,6 +546,10 @@ function checkLock() {
 
 }
 
+
+/* =========================
+   LOGIN
+========================= */
 
 function login() {
 
@@ -508,7 +568,24 @@ function login() {
     password === CORRECT_PASSWORD
   ) {
 
-    document.getElementById("lockScreen").style.display = "none";
+    /*
+      Save today's date.
+
+      This means refreshing the page
+      will NOT require another login
+      for the rest of today.
+    */
+
+    localStorage.setItem(
+      "k12LoginDate",
+      getTodayKey()
+    );
+
+
+    document.getElementById(
+      "lockScreen"
+    ).style.display = "none";
+
 
     error.style.display = "none";
 
@@ -521,7 +598,9 @@ function login() {
 }
 
 
-/* Enter key logs in */
+/* =========================
+   ENTER KEY LOGIN
+========================= */
 
 document.addEventListener(
   "keydown",
@@ -591,7 +670,9 @@ function closeGame(event) {
 }
 
 
-/* Escape closes game */
+/* =========================
+   ESCAPE CLOSES GAME
+========================= */
 
 document.addEventListener(
   "keydown",
@@ -607,12 +688,17 @@ document.addEventListener(
 );
 
 
-/* Check lock immediately */
+/* =========================
+   START LOCK CHECK
+========================= */
 
 checkLock();
 
 
-/* Recheck every 30 seconds */
+/*
+  Check every 30 seconds so the
+  lock status stays updated.
+*/
 
 setInterval(
   checkLock,
