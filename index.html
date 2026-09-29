@@ -333,7 +333,7 @@ body {
     <div
       class="game"
       onclick="openGame('https://the-pizza-editionfree.github.io/lesson305/lesson-412/')"
-      title="Baldi's"
+      title="Baldi's Basics"
     >
       <img
         src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/unnamed.png"
@@ -377,6 +377,19 @@ body {
       <img
         src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Subway%20Surfers.png"
         alt="Subway Surfers"
+      >
+    </div>
+
+
+    <!-- Minecraft -->
+    <div
+      class="game"
+      onclick="openGame('https://k-12study.github.io/minecraft')"
+      title="Minecraft"
+    >
+      <img
+        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/8C727C19-4E53-440A-9F23-861871A45931.png"
+        alt="Minecraft"
       >
     </div>
 
@@ -571,9 +584,8 @@ function login() {
     /*
       Save today's date.
 
-      This means refreshing the page
-      will NOT require another login
-      for the rest of today.
+      The user will not have to
+      sign in again today.
     */
 
     localStorage.setItem(
@@ -696,8 +708,7 @@ checkLock();
 
 
 /*
-  Check every 30 seconds so the
-  lock status stays updated.
+  Check every 30 seconds.
 */
 
 setInterval(
