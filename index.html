@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K-12 Study Games</title>
-
-<style>
-* {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      K-12 Study Games
+    </title>
+    <style>
+      * {
   box-sizing: border-box;
 }
 
@@ -105,6 +106,30 @@ body {
 .site-name {
   font-size: 21px;
   font-weight: bold;
+}
+
+
+
+/* =========================
+   TOP RIGHT VISITOR COUNTER
+========================= */
+
+.top-right-tools {
+  margin-left: auto;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-right-tools a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.top-right-tools a:hover {
+  text-decoration: underline;
 }
 
 /* =========================
@@ -237,213 +262,98 @@ body {
     height: 90vh;
   }
 }
-</style>
-</head>
-
-<body>
-
-<!-- =========================
+    </style>
+  </head>
+  <body>
+    <!-- =========================
      LOCK SCREEN
 ========================= -->
-
-<div id="lockScreen">
-
-  <div class="login-box">
-
-    <h2>K-12 Study</h2>
-
-    <input
-      type="text"
-      id="username"
-      placeholder="Username"
-    >
-
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-    >
-
-    <button onclick="login()">Login</button>
-
-    <div id="loginError">
-      Incorrect username or password.
+    <div id="lockScreen">
+      <div class="login-box">
+        <h2>
+          K-12 Study
+        </h2>
+        <input type="text" id="username" placeholder="Username" />
+        <input type="password" id="password" placeholder="Password" />
+        <button onclick="login()">
+          Login
+        </button>
+        <div id="loginError">
+          Incorrect username or password.
+        </div>
+      </div>
     </div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================
+    <!-- =========================
      TOP BAR
 ========================= -->
+    <div class="top-bar">
+      <a href="https://k-12study.github.io">      <img class="logo" src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico" alt="K-12 Study" />
+</a>
+      <a class="site-name" href="https://k-12study.github.io">      K-12 Study
+</a>
+      <a href="https://k-12study.github.io/contact-us" style="margin-left: 20px;">      Contact Us
+</a>
 
-<div class="top-bar">
-
-  <a href="https://k-12study.github.io">
-
-    <img
-      class="logo"
-      src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico"
-      alt="K-12 Study"
-    >
-
-  </a>
-
-  <a
-    class="site-name"
-    href="https://k-12study.github.io"
-  >
-    K-12 Study
-  </a>
-
-  <a
-    href="https://k-12study.github.io/contact-us"
-    style="margin-left: 20px;"
-  >
-    Contact Us
-  </a>
-
-</div>
-
-
-<!-- =========================
+      <div class="top-right-tools">
+        <div align=center><a href='https://www.counter12.com'><img src='https://www.counter12.com/img-452Zc4dZ1zw7cd23-9.gif' border='0' alt='free web counter'></a><script type='text/javascript' src='https://www.counter12.com/ad.js?id=452Zc4dZ1zw7cd23'></script></div>
+      </div>
+    </div>
+    <!-- =========================
      GAMES
 ========================= -->
-
-<main class="games-area">
-
-  <div class="games-grid">
-
-    <!-- Geometry Dash -->
-    <div
-      class="game"
-      onclick="openGame('https://lolygames.github.io/gd-lit')"
-      title="Geometry Dash"
-    >
-      <img
-        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Geometry_Dash_Icon.png"
-        alt="Geometry Dash"
-      >
-    </div>
-
-
-    <!-- Baldi's Basics -->
-    <div
-      class="game"
-      onclick="openGame('https://the-pizza-editionfree.github.io/lesson305/lesson-412/')"
-      title="Baldi's Basics"
-    >
-      <img
-        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/unnamed.png"
-        alt="Baldi's Basics"
-      >
-    </div>
-
-
-    <!-- Football Bros -->
-    <div
-      class="game"
-      onclick="openGame('https://footballbros.io/')"
-      title="Football Bros"
-    >
-      <img
-        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Football%20Bros.png"
-        alt="Football Bros"
-      >
-    </div>
-
-
-    <!-- Stickman Hook -->
-    <div
-      class="game"
-      onclick="openGame('https://stickman.pro/iframe/')"
-      title="Stickman Hook"
-    >
-      <img
-        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Stickman%20Hook.jpeg"
-        alt="Stickman Hook"
-      >
-    </div>
-
-
-    <!-- Subway Surfers -->
-    <div
-      class="game"
-      onclick="openGame('https://baldis-basics-online.github.io/g26/class-444/')"
-      title="Subway Surfers"
-    >
-      <img
-        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Subway%20Surfers.png"
-        alt="Subway Surfers"
-      >
-    </div>
-
-
-    <!-- Minecraft -->
-    <div
-      class="game"
-      onclick="openGame('https://k-12study.github.io/minecraft')"
-      title="Minecraft"
-    >
-      <img
-        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/8C727C19-4E53-440A-9F23-861871A45931.png"
-        alt="Minecraft"
-      >
-    </div>
-
-  </div>
-
-</main>
-
-
-<!-- =========================
+    <main class="games-area">
+      <div class="games-grid">
+        <!-- Geometry Dash -->
+        <div class="game" onclick="openGame(&#39;https://lolygames.github.io/gd-lit&#39;)" title="Geometry Dash">
+          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Geometry_Dash_Icon.png" alt="Geometry Dash" />
+        </div>
+        <!-- Baldi's Basics -->
+        <div class="game" onclick="openGame(&#39;https://the-pizza-editionfree.github.io/lesson305/lesson-412/&#39;)" title="Baldi&#39;s Basics">
+          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/unnamed.png" alt="Baldi&#39;s Basics" />
+        </div>
+        <!-- Football Bros -->
+        <div class="game" onclick="openGame(&#39;https://footballbros.io/&#39;)" title="Football Bros">
+          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Football%20Bros.png" alt="Football Bros" />
+        </div>
+        <!-- Stickman Hook -->
+        <div class="game" onclick="openGame(&#39;https://stickman.pro/iframe/&#39;)" title="Stickman Hook">
+          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Stickman%20Hook.jpeg" alt="Stickman Hook" />
+        </div>
+        <!-- Subway Surfers -->
+        <div class="game" onclick="openGame(&#39;https://baldis-basics-online.github.io/g26/class-444/&#39;)" title="Subway Surfers">
+          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Subway%20Surfers.png" alt="Subway Surfers" />
+        </div>
+        <!-- Minecraft -->
+        <div class="game" onclick="openGame(&#39;https://k-12study.github.io/minecraft&#39;)" title="Minecraft">
+          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/8C727C19-4E53-440A-9F23-861871A45931.png" alt="Minecraft" />
+        </div>
+      </div>
+    </main>
+    <!-- =========================
      GAME OVERLAY
 ========================= -->
-
-<div
-  class="game-overlay"
-  id="gameOverlay"
-  onclick="closeGame(event)"
->
-
-  <div class="game-window">
-
-    <div class="game-header">
-
-      <button
-        class="close-button"
-        onclick="closeGame()"
-      >
-        ×
-      </button>
-
+    <div class="game-overlay" id="gameOverlay" onclick="closeGame(event)">
+      <div class="game-window">
+        <div class="game-header">
+          <button class="close-button" onclick="closeGame()">
+            ×
+          </button>
+        </div>
+        <iframe id="gameFrame" src="" allowfullscreen="">
+        </iframe>
+      </div>
     </div>
-
-    <iframe
-      id="gameFrame"
-      src=""
-      allowfullscreen
-    ></iframe>
-
-  </div>
-
-</div>
-
-
-<script>
-
-/* =========================
+    <script>
+      /* =========================
    LOGIN SETTINGS
 ========================= */
 
-const CORRECT_USERNAME = "admin";
-const CORRECT_PASSWORD = "123456";
+const CORRECT_USERNAME = &#34;admin&#34;;
+const CORRECT_PASSWORD = &#34;123456&#34;;
 
 
 /* =========================
-   GET TODAY'S DATE
+   GET TODAY&#39;S DATE
 ========================= */
 
 function getTodayKey() {
@@ -452,10 +362,10 @@ function getTodayKey() {
 
   return (
     now.getFullYear() +
-    "-" +
-    String(now.getMonth() + 1).padStart(2, "0") +
-    "-" +
-    String(now.getDate()).padStart(2, "0")
+    &#34;-&#34; +
+    String(now.getMonth() + 1).padStart(2, &#34;0&#34;) +
+    &#34;-&#34; +
+    String(now.getDate()).padStart(2, &#34;0&#34;)
   );
 
 }
@@ -497,8 +407,8 @@ function isLockedTime() {
 
 
   return (
-    currentMinutes >= lockStart &&
-    currentMinutes < lockEnd
+    currentMinutes &gt;= lockStart &amp;&amp;
+    currentMinutes &lt; lockEnd
   );
 
 }
@@ -512,7 +422,7 @@ function isLockedTime() {
 function hasLoggedInToday() {
 
   return (
-    localStorage.getItem("k12LoginDate") ===
+    localStorage.getItem(&#34;k12LoginDate&#34;) ===
     getTodayKey()
   );
 
@@ -526,7 +436,7 @@ function hasLoggedInToday() {
 function checkLock() {
 
   const lockScreen =
-    document.getElementById("lockScreen");
+    document.getElementById(&#34;lockScreen&#34;);
 
 
   /*
@@ -536,7 +446,7 @@ function checkLock() {
 
   if (hasLoggedInToday()) {
 
-    lockScreen.style.display = "none";
+    lockScreen.style.display = &#34;none&#34;;
 
     return;
   }
@@ -549,11 +459,11 @@ function checkLock() {
 
   if (isLockedTime()) {
 
-    lockScreen.style.display = "flex";
+    lockScreen.style.display = &#34;flex&#34;;
 
   } else {
 
-    lockScreen.style.display = "none";
+    lockScreen.style.display = &#34;none&#34;;
 
   }
 
@@ -567,43 +477,43 @@ function checkLock() {
 function login() {
 
   const username =
-    document.getElementById("username").value;
+    document.getElementById(&#34;username&#34;).value;
 
   const password =
-    document.getElementById("password").value;
+    document.getElementById(&#34;password&#34;).value;
 
   const error =
-    document.getElementById("loginError");
+    document.getElementById(&#34;loginError&#34;);
 
 
   if (
-    username === CORRECT_USERNAME &&
+    username === CORRECT_USERNAME &amp;&amp;
     password === CORRECT_PASSWORD
   ) {
 
     /*
-      Save today's date.
+      Save today&#39;s date.
 
       The user will not have to
       sign in again today.
     */
 
     localStorage.setItem(
-      "k12LoginDate",
+      &#34;k12LoginDate&#34;,
       getTodayKey()
     );
 
 
     document.getElementById(
-      "lockScreen"
-    ).style.display = "none";
+      &#34;lockScreen&#34;
+    ).style.display = &#34;none&#34;;
 
 
-    error.style.display = "none";
+    error.style.display = &#34;none&#34;;
 
   } else {
 
-    error.style.display = "block";
+    error.style.display = &#34;block&#34;;
 
   }
 
@@ -615,12 +525,12 @@ function login() {
 ========================= */
 
 document.addEventListener(
-  "keydown",
+  &#34;keydown&#34;,
   function(event) {
 
     if (
-      event.key === "Enter" &&
-      document.getElementById("lockScreen").style.display === "flex"
+      event.key === &#34;Enter&#34; &amp;&amp;
+      document.getElementById(&#34;lockScreen&#34;).style.display === &#34;flex&#34;
     ) {
 
       login();
@@ -638,15 +548,15 @@ document.addEventListener(
 function openGame(url) {
 
   const overlay =
-    document.getElementById("gameOverlay");
+    document.getElementById(&#34;gameOverlay&#34;);
 
   const iframe =
-    document.getElementById("gameFrame");
+    document.getElementById(&#34;gameFrame&#34;);
 
 
   iframe.src = url;
 
-  overlay.style.display = "flex";
+  overlay.style.display = &#34;flex&#34;;
 
 }
 
@@ -658,9 +568,9 @@ function openGame(url) {
 function closeGame(event) {
 
   if (
-    event &&
+    event &amp;&amp;
     event.target !==
-    document.getElementById("gameOverlay")
+    document.getElementById(&#34;gameOverlay&#34;)
   ) {
 
     return;
@@ -669,15 +579,15 @@ function closeGame(event) {
 
 
   const overlay =
-    document.getElementById("gameOverlay");
+    document.getElementById(&#34;gameOverlay&#34;);
 
   const iframe =
-    document.getElementById("gameFrame");
+    document.getElementById(&#34;gameFrame&#34;);
 
 
-  iframe.src = "";
+  iframe.src = &#34;&#34;;
 
-  overlay.style.display = "none";
+  overlay.style.display = &#34;none&#34;;
 
 }
 
@@ -687,10 +597,10 @@ function closeGame(event) {
 ========================= */
 
 document.addEventListener(
-  "keydown",
+  &#34;keydown&#34;,
   function(event) {
 
-    if (event.key === "Escape") {
+    if (event.key === &#34;Escape&#34;) {
 
       closeGame();
 
@@ -715,8 +625,6 @@ setInterval(
   checkLock,
   30000
 );
-
-</script>
-
-</body>
+    </script>
+  </body>
 </html>
