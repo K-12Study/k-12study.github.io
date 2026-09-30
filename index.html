@@ -1,630 +1,725 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      K-12 Study Games
-    </title>
-    <style>
-      * {
-  box-sizing: border-box;
-}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K-12 Study Games</title>
 
-body {
-  margin: 0;
-  background: #181818;
-  color: white;
-  font-family: Arial, sans-serif;
-  min-height: 100vh;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-/* =========================
-   LOCK SCREEN
-========================= */
+    body {
+      margin: 0;
+      background: #181818;
+      color: white;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+    }
 
-#lockScreen {
-  position: fixed;
-  inset: 0;
-  background: #181818;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-}
+    /* =========================
+       LOCK SCREEN
+    ========================= */
 
-.login-box {
-  background: #252525;
-  padding: 30px;
-  border-radius: 12px;
-  width: 320px;
-  text-align: center;
-  box-shadow: 0 5px 25px rgba(0,0,0,.6);
-}
+    #lockScreen {
+      position: fixed;
+      inset: 0;
+      background: #181818;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
 
-.login-box h2 {
-  margin-top: 0;
-}
+    .login-box {
+      background: #252525;
+      padding: 30px;
+      border-radius: 12px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 5px 25px rgba(0,0,0,.6);
+    }
 
-.login-box input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 6px;
-  background: #333;
-  color: white;
-}
+    .login-box h2 {
+      margin-top: 0;
+    }
 
-.login-box button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 6px;
-  background: #444;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-}
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 6px;
+      background: #333;
+      color: white;
+    }
 
-.login-box button:hover {
-  background: #555;
-}
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #444;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-#loginError {
-  display: none;
-  color: #ff4d4d;
-  margin-top: 10px;
-}
+    .login-box button:hover {
+      background: #555;
+    }
 
-/* =========================
-   TOP BAR
-========================= */
+    #loginError {
+      display: none;
+      color: #ff4d4d;
+      margin-top: 10px;
+    }
 
-.top-bar {
-  height: 65px;
-  background: #222;
-  display: flex;
-  align-items: center;
-  padding-left: 40px;
-  gap: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.5);
-}
+    /* =========================
+       TOP BAR
+    ========================= */
 
-.top-bar a {
-  color: white;
-  text-decoration: none;
-}
+    .top-bar {
+      height: 65px;
+      background: #222;
+      display: flex;
+      align-items: center;
+      padding-left: 40px;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.5);
+    }
 
-.logo {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-}
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+    }
 
-.site-name {
-  font-size: 21px;
-  font-weight: bold;
-}
+    .logo {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
 
+    .site-name {
+      font-size: 21px;
+      font-weight: bold;
+    }
 
+    /* =========================
+       TOP RIGHT VISITOR COUNTER
+    ========================= */
 
-/* =========================
-   TOP RIGHT VISITOR COUNTER
-========================= */
+    .top-right-tools {
+      margin-left: auto;
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.top-right-tools {
-  margin-left: auto;
-  margin-right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+    .top-right-tools a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
 
-.top-right-tools a {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-}
+    .top-right-tools a:hover {
+      text-decoration: underline;
+    }
 
-.top-right-tools a:hover {
-  text-decoration: underline;
-}
+    /* =========================
+       GAMES
+    ========================= */
 
-/* =========================
-   GAMES
-========================= */
+    .games-area {
+      padding: 35px 0 0 70px;
+    }
 
-.games-area {
-  padding: 35px 0 0 70px;
-}
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 150px);
+      gap: 22px;
+    }
 
-.games-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 150px);
-  gap: 22px;
-}
+    .game {
+      width: 150px;
+      height: 150px;
+      background: #252525;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s, background .2s;
+      overflow: hidden;
+    }
 
-.game {
-  width: 150px;
-  height: 150px;
-  background: #252525;
-  border-radius: 14px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform .2s, box-shadow .2s, background .2s;
-  overflow: hidden;
-}
+    .game:hover {
+      transform: translateY(-4px);
+      background: #303030;
+      box-shadow: 0 6px 18px rgba(0,0,0,.7);
+    }
 
-.game:hover {
-  transform: translateY(-4px);
-  background: #303030;
-  box-shadow: 0 6px 18px rgba(0,0,0,.7);
-}
+    .game img {
+      width: 105px;
+      height: 105px;
+      object-fit: contain;
+    }
 
-.game img {
-  width: 105px;
-  height: 105px;
-  object-fit: contain;
-}
+    /* =========================
+       GAME POPUP
+    ========================= */
 
-/* =========================
-   GAME POPUP
-========================= */
+    .game-overlay {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background: #555;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-.game-overlay {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  inset: 0;
-  background: #555;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
+    .game-window {
+      position: relative;
+      width: 90vw;
+      height: 90vh;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0,0,0,.8);
+      display: flex;
+      flex-direction: column;
+    }
 
-.game-window {
-  position: relative;
-  width: 90vw;
-  height: 90vh;
-  background: #000;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 30px rgba(0,0,0,.8);
-  display: flex;
-  flex-direction: column;
-}
+    .game-header {
+      height: 45px;
+      min-height: 45px;
+      background: #222;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 10px;
+    }
 
-.game-header {
-  height: 45px;
-  min-height: 45px;
-  background: #222;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 10px;
-}
+    .close-button {
+      background: transparent;
+      border: none;
+      color: red;
+      font-size: 27px;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+      padding: 3px 8px;
+    }
 
-.close-button {
-  background: transparent;
-  border: none;
-  color: red;
-  font-size: 27px;
-  font-weight: bold;
-  cursor: pointer;
-  line-height: 1;
-  padding: 3px 8px;
-}
+    .close-button:hover {
+      color: #ff5555;
+      transform: scale(1.1);
+    }
 
-.close-button:hover {
-  color: #ff5555;
-  transform: scale(1.1);
-}
+    .game-window iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+      display: block;
+      background: #000;
+    }
 
-.game-window iframe {
-  width: 100%;
-  flex: 1;
-  border: none;
-  display: block;
-  background: #000;
-}
+    /* =========================
+       MOBILE
+    ========================= */
 
-/* =========================
-   MOBILE
-========================= */
+    @media (max-width: 600px) {
 
-@media (max-width: 600px) {
+      .top-bar {
+        padding-left: 20px;
+        gap: 18px;
+      }
 
-  .top-bar {
-    padding-left: 20px;
-    gap: 18px;
-  }
+      .games-area {
+        padding-left: 20px;
+      }
 
-  .games-area {
-    padding-left: 20px;
-  }
+      .games-grid {
+        grid-template-columns: repeat(2, 130px);
+      }
 
-  .games-grid {
-    grid-template-columns: repeat(2, 130px);
-  }
+      .game {
+        width: 130px;
+        height: 130px;
+      }
 
-  .game {
-    width: 130px;
-    height: 130px;
-  }
+      .game-window {
+        width: 95vw;
+        height: 90vh;
+      }
+    }
+  </style>
+</head>
 
-  .game-window {
-    width: 95vw;
-    height: 90vh;
-  }
-}
-    </style>
-  </head>
-  <body>
-    <!-- =========================
-     LOCK SCREEN
-========================= -->
-    <div id="lockScreen">
-      <div class="login-box">
-        <h2>
-          K-12 Study
-        </h2>
-        <input type="text" id="username" placeholder="Username" />
-        <input type="password" id="password" placeholder="Password" />
-        <button onclick="login()">
-          Login
+<body>
+
+  <!-- =========================
+       LOCK SCREEN
+  ========================= -->
+
+  <div id="lockScreen">
+    <div class="login-box">
+      <h2>K-12 Study</h2>
+
+      <input
+        type="text"
+        id="username"
+        placeholder="Username"
+      />
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Password"
+      />
+
+      <button onclick="login()">
+        Login
+      </button>
+
+      <div id="loginError">
+        Incorrect username or password.
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       TOP BAR
+  ========================= -->
+
+  <div class="top-bar">
+
+    <a href="https://k-12study.github.io">
+      <img
+        class="logo"
+        src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico"
+        alt="K-12 Study"
+      />
+    </a>
+
+    <a
+      class="site-name"
+      href="https://k-12study.github.io"
+    >
+      K-12 Study
+    </a>
+
+    <a
+      href="https://k-12study.github.io/contact-us"
+      style="margin-left: 20px;"
+    >
+      Submit a request
+    </a>
+
+    <div class="top-right-tools">
+      <div align="center">
+        <a href="https://www.counter12.com">
+          <img
+            src="https://www.counter12.com/img-452Zc4dZ1zw7cd23-9.gif"
+            border="0"
+            alt="free web counter"
+          />
+        </a>
+
+        <script
+          type="text/javascript"
+          src="https://www.counter12.com/ad.js?id=452Zc4dZ1zw7cd23">
+        </script>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- =========================
+       GAMES
+  ========================= -->
+
+  <main class="games-area">
+
+    <div class="games-grid">
+
+      <!-- Geometry Dash -->
+      <div
+        class="game"
+        onclick="openGame('https://lolygames.github.io/gd-lit')"
+        title="Geometry Dash"
+      >
+        <img
+          src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Geometry_Dash_Icon.png"
+          alt="Geometry Dash"
+        />
+      </div>
+
+      <!-- Baldi's Basics -->
+      <div
+        class="game"
+        onclick="openGame('https://the-pizza-editionfree.github.io/lesson305/lesson-412/')"
+        title="Baldi's Basics"
+      >
+        <img
+          src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/unnamed.png"
+          alt="Baldi's Basics"
+        />
+      </div>
+
+      <!-- Football Bros -->
+      <div
+        class="game"
+        onclick="openGame('https://footballbros.io/')"
+        title="Football Bros"
+      >
+        <img
+          src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Football%20Bros.png"
+          alt="Football Bros"
+        />
+      </div>
+
+      <!-- Stickman Hook -->
+      <div
+        class="game"
+        onclick="openGame('https://stickman.pro/iframe/')"
+        title="Stickman Hook"
+      >
+        <img
+          src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Stickman%20Hook.jpeg"
+          alt="Stickman Hook"
+        />
+      </div>
+
+      <!-- Subway Surfers -->
+      <div
+        class="game"
+        onclick="openGame('https://baldis-basics-online.github.io/g26/class-444/')"
+        title="Subway Surfers"
+      >
+        <img
+          src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Subway%20Surfers.png"
+          alt="Subway Surfers"
+        />
+      </div>
+
+      <!-- Minecraft -->
+      <div
+        class="game"
+        onclick="openGame('https://k-12study.github.io/minecraft')"
+        title="Minecraft"
+      >
+        <img
+          src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/8C727C19-4E53-440A-9F23-861871A45931.png"
+          alt="Minecraft"
+        />
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =========================
+       GAME OVERLAY
+  ========================= -->
+
+  <div
+    class="game-overlay"
+    id="gameOverlay"
+    onclick="closeGame(event)"
+  >
+
+    <div class="game-window">
+
+      <div class="game-header">
+        <button
+          class="close-button"
+          onclick="closeGame()"
+        >
+          ×
         </button>
-        <div id="loginError">
-          Incorrect username or password.
-        </div>
       </div>
+
+      <iframe
+        id="gameFrame"
+        src=""
+        allowfullscreen
+      ></iframe>
+
     </div>
-    <!-- =========================
-     TOP BAR
-========================= -->
-    <div class="top-bar">
-      <a href="https://k-12study.github.io">      <img class="logo" src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico" alt="K-12 Study" />
-</a>
-      <a class="site-name" href="https://k-12study.github.io">      K-12 Study
-</a>
-      <a href="https://k-12study.github.io/contact-us" style="margin-left: 20px;">      Submit a request
-</a>
+  </div>
 
-      <div class="top-right-tools">
-        <div align=center><a href='https://www.counter12.com'><img src='https://www.counter12.com/img-452Zc4dZ1zw7cd23-9.gif' border='0' alt='free web counter'></a><script type='text/javascript' src='https://www.counter12.com/ad.js?id=452Zc4dZ1zw7cd23'></script></div>
-      </div>
-    </div>
-    <!-- =========================
-     GAMES
-========================= -->
-    <main class="games-area">
-      <div class="games-grid">
-        <!-- Geometry Dash -->
-        <div class="game" onclick="openGame(&#39;https://lolygames.github.io/gd-lit&#39;)" title="Geometry Dash">
-          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Geometry_Dash_Icon.png" alt="Geometry Dash" />
-        </div>
-        <!-- Baldi's Basics -->
-        <div class="game" onclick="openGame(&#39;https://the-pizza-editionfree.github.io/lesson305/lesson-412/&#39;)" title="Baldi&#39;s Basics">
-          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/unnamed.png" alt="Baldi&#39;s Basics" />
-        </div>
-        <!-- Football Bros -->
-        <div class="game" onclick="openGame(&#39;https://footballbros.io/&#39;)" title="Football Bros">
-          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Football%20Bros.png" alt="Football Bros" />
-        </div>
-        <!-- Stickman Hook -->
-        <div class="game" onclick="openGame(&#39;https://stickman.pro/iframe/&#39;)" title="Stickman Hook">
-          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Stickman%20Hook.jpeg" alt="Stickman Hook" />
-        </div>
-        <!-- Subway Surfers -->
-        <div class="game" onclick="openGame(&#39;https://baldis-basics-online.github.io/g26/class-444/&#39;)" title="Subway Surfers">
-          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Subway%20Surfers.png" alt="Subway Surfers" />
-        </div>
-        <!-- Minecraft -->
-        <div class="game" onclick="openGame(&#39;https://k-12study.github.io/minecraft&#39;)" title="Minecraft">
-          <img src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/8C727C19-4E53-440A-9F23-861871A45931.png" alt="Minecraft" />
-        </div>
-      </div>
-    </main>
-    <!-- =========================
-     GAME OVERLAY
-========================= -->
-    <div class="game-overlay" id="gameOverlay" onclick="closeGame(event)">
-      <div class="game-window">
-        <div class="game-header">
-          <button class="close-button" onclick="closeGame()">
-            ×
-          </button>
-        </div>
-        <iframe id="gameFrame" src="" allowfullscreen="">
-        </iframe>
-      </div>
-    </div>
-    <script>
-      /* =========================
-   LOGIN SETTINGS
-========================= */
+  <script>
 
-const CORRECT_USERNAME = &#34;admin&#34;;
-const CORRECT_PASSWORD = &#34;123456&#34;;
+    /* =========================
+       LOGIN SETTINGS
+    ========================= */
+
+    const CORRECT_USERNAME = "admin";
+    const CORRECT_PASSWORD = "123456";
 
 
-/* =========================
-   GET TODAY&#39;S DATE
-========================= */
+    /* =========================
+       GET TODAY'S DATE
+    ========================= */
 
-function getTodayKey() {
+    function getTodayKey() {
 
-  const now = new Date();
+      const now = new Date();
 
-  return (
-    now.getFullYear() +
-    &#34;-&#34; +
-    String(now.getMonth() + 1).padStart(2, &#34;0&#34;) +
-    &#34;-&#34; +
-    String(now.getDate()).padStart(2, &#34;0&#34;)
-  );
+      return (
+        now.getFullYear() +
+        "-" +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(now.getDate()).padStart(2, "0")
+      );
 
-}
-
-
-/* =========================
-   CHECK LOCKED TIME
-========================= */
-
-function isLockedTime() {
-
-  const now = new Date();
-
-  const day = now.getDay();
-
-  const hours = now.getHours();
-
-  const minutes = now.getMinutes();
-
-  const currentMinutes =
-    hours * 60 + minutes;
+    }
 
 
-  /* Saturday and Sunday are unlocked */
+    /* =========================
+       CHECK LOCKED TIME
+    ========================= */
 
-  if (day === 0 || day === 6) {
-    return false;
-  }
+    function isLockedTime() {
 
+      const now = new Date();
 
-  /* Monday-Friday:
-     7:45 AM through 2:45 PM */
+      const day = now.getDay();
 
-  const lockStart =
-    7 * 60 + 45;
+      const hours = now.getHours();
 
-  const lockEnd =
-    14 * 60 + 45;
+      const minutes = now.getMinutes();
 
-
-  return (
-    currentMinutes &gt;= lockStart &amp;&amp;
-    currentMinutes &lt; lockEnd
-  );
-
-}
+      const currentMinutes =
+        hours * 60 + minutes;
 
 
-/* =========================
-   CHECK IF ALREADY LOGGED
-   IN TODAY
-========================= */
+      /* Saturday and Sunday are unlocked */
 
-function hasLoggedInToday() {
-
-  return (
-    localStorage.getItem(&#34;k12LoginDate&#34;) ===
-    getTodayKey()
-  );
-
-}
+      if (day === 0 || day === 6) {
+        return false;
+      }
 
 
-/* =========================
-   CHECK LOCK SCREEN
-========================= */
+      /* Monday-Friday:
+         7:45 AM through 2:45 PM */
 
-function checkLock() {
+      const lockStart =
+        7 * 60 + 45;
 
-  const lockScreen =
-    document.getElementById(&#34;lockScreen&#34;);
-
-
-  /*
-    If the user already logged in
-    today, keep the site unlocked.
-  */
-
-  if (hasLoggedInToday()) {
-
-    lockScreen.style.display = &#34;none&#34;;
-
-    return;
-  }
+      const lockEnd =
+        14 * 60 + 45;
 
 
-  /*
-    Otherwise, show the login
-    during the locked school hours.
-  */
+      return (
+        currentMinutes >= lockStart &&
+        currentMinutes < lockEnd
+      );
 
-  if (isLockedTime()) {
-
-    lockScreen.style.display = &#34;flex&#34;;
-
-  } else {
-
-    lockScreen.style.display = &#34;none&#34;;
-
-  }
-
-}
+    }
 
 
-/* =========================
-   LOGIN
-========================= */
+    /* =========================
+       CHECK IF ALREADY LOGGED
+       IN TODAY
+    ========================= */
 
-function login() {
+    function hasLoggedInToday() {
 
-  const username =
-    document.getElementById(&#34;username&#34;).value;
+      return (
+        localStorage.getItem("k12LoginDate") ===
+        getTodayKey()
+      );
 
-  const password =
-    document.getElementById(&#34;password&#34;).value;
-
-  const error =
-    document.getElementById(&#34;loginError&#34;);
+    }
 
 
-  if (
-    username === CORRECT_USERNAME &amp;&amp;
-    password === CORRECT_PASSWORD
-  ) {
+    /* =========================
+       CHECK LOCK SCREEN
+    ========================= */
 
-    /*
-      Save today&#39;s date.
+    function checkLock() {
 
-      The user will not have to
-      sign in again today.
-    */
+      const lockScreen =
+        document.getElementById("lockScreen");
 
-    localStorage.setItem(
-      &#34;k12LoginDate&#34;,
-      getTodayKey()
+
+      if (hasLoggedInToday()) {
+
+        lockScreen.style.display = "none";
+
+        return;
+      }
+
+
+      if (isLockedTime()) {
+
+        lockScreen.style.display = "flex";
+
+      } else {
+
+        lockScreen.style.display = "none";
+
+      }
+
+    }
+
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    function login() {
+
+      const username =
+        document.getElementById("username").value;
+
+      const password =
+        document.getElementById("password").value;
+
+      const error =
+        document.getElementById("loginError");
+
+
+      if (
+        username === CORRECT_USERNAME &&
+        password === CORRECT_PASSWORD
+      ) {
+
+        localStorage.setItem(
+          "k12LoginDate",
+          getTodayKey()
+        );
+
+
+        document.getElementById(
+          "lockScreen"
+        ).style.display = "none";
+
+
+        error.style.display = "none";
+
+      } else {
+
+        error.style.display = "block";
+
+      }
+
+    }
+
+
+    /* =========================
+       ENTER KEY LOGIN
+    ========================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Enter" &&
+          document.getElementById("lockScreen").style.display === "flex"
+        ) {
+
+          login();
+
+        }
+
+      }
     );
 
 
-    document.getElementById(
-      &#34;lockScreen&#34;
-    ).style.display = &#34;none&#34;;
+    /* =========================
+       OPEN GAME
+    ========================= */
+
+    function openGame(url) {
+
+      const overlay =
+        document.getElementById("gameOverlay");
+
+      const iframe =
+        document.getElementById("gameFrame");
 
 
-    error.style.display = &#34;none&#34;;
+      iframe.src = url;
 
-  } else {
-
-    error.style.display = &#34;block&#34;;
-
-  }
-
-}
-
-
-/* =========================
-   ENTER KEY LOGIN
-========================= */
-
-document.addEventListener(
-  &#34;keydown&#34;,
-  function(event) {
-
-    if (
-      event.key === &#34;Enter&#34; &amp;&amp;
-      document.getElementById(&#34;lockScreen&#34;).style.display === &#34;flex&#34;
-    ) {
-
-      login();
+      overlay.style.display = "flex";
 
     }
 
-  }
-);
+
+    /* =========================
+       CLOSE GAME
+    ========================= */
+
+    function closeGame(event) {
+
+      if (
+        event &&
+        event.target !==
+        document.getElementById("gameOverlay")
+      ) {
+
+        return;
+
+      }
 
 
-/* =========================
-   OPEN GAME
-========================= */
+      const overlay =
+        document.getElementById("gameOverlay");
 
-function openGame(url) {
-
-  const overlay =
-    document.getElementById(&#34;gameOverlay&#34;);
-
-  const iframe =
-    document.getElementById(&#34;gameFrame&#34;);
+      const iframe =
+        document.getElementById("gameFrame");
 
 
-  iframe.src = url;
+      iframe.src = "";
 
-  overlay.style.display = &#34;flex&#34;;
-
-}
-
-
-/* =========================
-   CLOSE GAME
-========================= */
-
-function closeGame(event) {
-
-  if (
-    event &amp;&amp;
-    event.target !==
-    document.getElementById(&#34;gameOverlay&#34;)
-  ) {
-
-    return;
-
-  }
-
-
-  const overlay =
-    document.getElementById(&#34;gameOverlay&#34;);
-
-  const iframe =
-    document.getElementById(&#34;gameFrame&#34;);
-
-
-  iframe.src = &#34;&#34;;
-
-  overlay.style.display = &#34;none&#34;;
-
-}
-
-
-/* =========================
-   ESCAPE CLOSES GAME
-========================= */
-
-document.addEventListener(
-  &#34;keydown&#34;,
-  function(event) {
-
-    if (event.key === &#34;Escape&#34;) {
-
-      closeGame();
+      overlay.style.display = "none";
 
     }
 
-  }
-);
+
+    /* =========================
+       ESCAPE CLOSES GAME
+    ========================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Escape") {
+
+          closeGame();
+
+        }
+
+      }
+    );
 
 
-/* =========================
-   START LOCK CHECK
-========================= */
+    /* =========================
+       START LOCK CHECK
+    ========================= */
 
-checkLock();
+    checkLock();
 
 
-/*
-  Check every 30 seconds.
-*/
+    /* Check every 30 seconds */
 
-setInterval(
-  checkLock,
-  30000
-);
-    </script>
-  </body>
+    setInterval(
+      checkLock,
+      30000
+    );
+
+  </script>
+
+</body>
 </html>
