@@ -763,17 +763,17 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
   <!-- CHAT PASSWORD LOCK -->
   <div id="chatLock">
     <div class="chat-lock-box">
-      <h2>Notes Locked</h2>
-      <p>Notes chat is locked from 7:45 AM to 2:45 PM on school days.</p>
+      <h2>Type "ok" to proceed.</h2>
+      <p>By typing "ok", you agree that the creator of this website does not take any responsibility for any students using this during school hours.</p>
 
       <input
         id="chatPassword"
         type="password"
-        placeholder="Enter password"
+        placeholder="ok"
         autocomplete="off"
       >
 
-      <div id="chatLockError">Incorrect password.</div>
+      <div id="chatLockError">Please type "ok"</div>
 
       <div class="chat-lock-buttons">
         <button id="chatUnlockButton" type="button" onclick="unlockChat()">Unlock</button>
@@ -884,7 +884,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       const password = document.getElementById("chatPassword").value;
       const error = document.getElementById("chatLockError");
 
-      if (password === "connect") {
+      if (password === "ok") {
         sessionStorage.setItem("chatUnlocked", "true");
         error.style.display = "none";
         document.getElementById("chatLock").style.display = "none";
