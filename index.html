@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +17,9 @@
 
   <noscript>
     <div class="statcounter">
-      <a
-        title="Web Analytics"
-        href="https://statcounter.com/"
-        target="_blank">
+      <a title="Web Analytics"
+         href="https://statcounter.com/"
+         target="_blank">
         <img
           class="statcounter"
           src="https://c.statcounter.com/13358610/0/50d911ec/1/"
@@ -644,8 +644,6 @@
 
     <div class="games-grid">
 
-      <!-- ROW 1 -->
-
       <!-- Geometry Dash -->
       <div
         class="game"
@@ -694,8 +692,6 @@
 
       </div>
 
-      <!-- ROW 2 -->
-
       <!-- Subway Surfers -->
       <div
         class="game"
@@ -743,8 +739,6 @@
           alt="Retro Bowl">
 
       </div>
-
-      <!-- ROW 3 -->
 
       <!-- Stickman Hook -->
       <div
@@ -795,7 +789,6 @@
       </div>
 
     </div>
-
   </main>
 
   <!-- NOTES BUTTON -->
@@ -912,7 +905,6 @@
       </div>
 
     </div>
-
   </div>
 
   <!-- GAME OVERLAY -->
@@ -942,7 +934,6 @@
       </iframe>
 
     </div>
-
   </div>
 
   <!-- SUPABASE -->
@@ -958,14 +949,23 @@
 
     function saveRedirectUrl() {
 
-      const input = document.getElementById("redirectUrl");
-      const status = document.getElementById("redirectStatus");
+      const input =
+        document.getElementById("redirectUrl");
 
-      let url = input.value.trim();
+      const status =
+        document.getElementById("redirectStatus");
+
+      let url =
+        input.value.trim();
 
       if (!url) {
-        localStorage.removeItem(REDIRECT_STORAGE_KEY);
+
+        localStorage.removeItem(
+          REDIRECT_STORAGE_KEY
+        );
+
         status.textContent = "Cleared";
+
         return;
       }
 
@@ -979,7 +979,10 @@
       try {
         new URL(url);
       } catch (error) {
-        status.textContent = "Invalid URL";
+
+        status.textContent =
+          "Invalid URL";
+
         return;
       }
 
@@ -989,33 +992,27 @@
       );
 
       input.value = url;
-      status.textContent = "Saved";
+
+      status.textContent =
+        "Saved";
     }
 
     function loadRedirectUrl() {
 
       const savedUrl =
-        localStorage.getItem(REDIRECT_STORAGE_KEY);
+        localStorage.getItem(
+          REDIRECT_STORAGE_KEY
+        );
 
       if (savedUrl) {
-        document.getElementById("redirectUrl").value =
-          savedUrl;
+
+        document.getElementById(
+          "redirectUrl"
+        ).value = savedUrl;
+
       }
     }
 
-    function redirectWithCtrlZ() {
-
-      const savedUrl =
-        localStorage.getItem(REDIRECT_STORAGE_KEY);
-
-      if (!savedUrl) {
-        return;
-      }
-
-      window.location.href = savedUrl;
-    }
-
-    /* CTRL + Z */
     document.addEventListener(
       "keydown",
       function(event) {
@@ -1027,29 +1024,36 @@
 
           event.preventDefault();
 
-          redirectWithCtrlZ();
+          const savedUrl =
+            localStorage.getItem(
+              REDIRECT_STORAGE_KEY
+            );
 
+          if (savedUrl) {
+            window.location.href =
+              savedUrl;
+          }
         }
 
       }
     );
 
-    /* Save URL when Enter is pressed */
-    document.getElementById("redirectUrl")
-      .addEventListener(
-        "keydown",
-        function(event) {
+    document.getElementById(
+      "redirectUrl"
+    ).addEventListener(
+      "keydown",
+      function(event) {
 
-          if (event.key === "Enter") {
-            saveRedirectUrl();
-          }
-
+        if (event.key === "Enter") {
+          saveRedirectUrl();
         }
-      );
+
+      }
+    );
 
 
     /* ==========================================
-       SUPABASE CHAT SETTINGS
+       SUPABASE CHAT
        ========================================== */
 
     const SUPABASE_URL =
@@ -1068,33 +1072,42 @@
 
 
     /* ==========================================
-       NOTES VISIBILITY
+       NOTES
        ========================================== */
 
     function showNotesButton() {
-      document.getElementById("notesButton").style.display =
-        "block";
+
+      document.getElementById(
+        "notesButton"
+      ).style.display = "block";
     }
 
     function hideNotesAndChat() {
-      document.getElementById("notesButton").style.display =
-        "none";
 
-      document.getElementById("chatWindow").style.display =
-        "none";
+      document.getElementById(
+        "notesButton"
+      ).style.display = "none";
+
+      document.getElementById(
+        "chatWindow"
+      ).style.display = "none";
     }
 
     function isChatLockedTime() {
 
       const now = new Date();
 
-      const day = now.getDay();
+      const day =
+        now.getDay();
 
       const currentMinutes =
         now.getHours() * 60 +
         now.getMinutes();
 
-      if (day === 0 || day === 6) {
+      if (
+        day === 0 ||
+        day === 6
+      ) {
         return false;
       }
 
@@ -1112,37 +1125,58 @@
 
     function openNotes() {
 
+      /* Extra protection:
+         Notes cannot open unless logged in today. */
+
+      if (!hasLoggedInToday()) {
+        return;
+      }
+
       if (
         isChatLockedTime() &&
-        sessionStorage.getItem("chatUnlocked") !== "true"
+        sessionStorage.getItem(
+          "chatUnlocked"
+        ) !== "true"
       ) {
 
-        document.getElementById("chatLock").style.display =
-          "flex";
+        document.getElementById(
+          "chatLock"
+        ).style.display = "flex";
 
-        document.getElementById("chatPassword").value =
-          "";
+        document.getElementById(
+          "chatPassword"
+        ).value = "";
 
-        document.getElementById("chatLockError").style.display =
-          "none";
+        document.getElementById(
+          "chatLockError"
+        ).style.display = "none";
 
         setTimeout(function() {
-          document.getElementById("chatPassword").focus();
+
+          document.getElementById(
+            "chatPassword"
+          ).focus();
+
         }, 50);
 
         return;
       }
 
-      document.getElementById("chatLock").style.display =
-        "none";
+      document.getElementById(
+        "chatLock"
+      ).style.display = "none";
 
-      document.getElementById("notesButton").style.display =
-        "none";
+      document.getElementById(
+        "notesButton"
+      ).style.display = "none";
 
-      document.getElementById("chatWindow").style.display =
-        "flex";
+      document.getElementById(
+        "chatWindow"
+      ).style.display = "flex";
 
-      document.getElementById("chatUsername").focus();
+      document.getElementById(
+        "chatUsername"
+      ).focus();
 
       loadChatMessages();
     }
@@ -1150,10 +1184,14 @@
     function unlockChat() {
 
       const password =
-        document.getElementById("chatPassword").value;
+        document.getElementById(
+          "chatPassword"
+        ).value;
 
       const error =
-        document.getElementById("chatLockError");
+        document.getElementById(
+          "chatLockError"
+        );
 
       if (password === "ok") {
 
@@ -1164,8 +1202,9 @@
 
         error.style.display = "none";
 
-        document.getElementById("chatLock").style.display =
-          "none";
+        document.getElementById(
+          "chatLock"
+        ).style.display = "none";
 
         openNotes();
 
@@ -1178,23 +1217,39 @@
 
     function cancelChatUnlock() {
 
-      document.getElementById("chatLock").style.display =
-        "none";
+      document.getElementById(
+        "chatLock"
+      ).style.display = "none";
 
-      document.getElementById("chatPassword").value =
-        "";
+      document.getElementById(
+        "chatPassword"
+      ).value = "";
 
-      document.getElementById("chatLockError").style.display =
-        "none";
+      document.getElementById(
+        "chatLockError"
+      ).style.display = "none";
     }
 
     function closeNotes() {
 
-      document.getElementById("chatWindow").style.display =
-        "none";
+      document.getElementById(
+        "chatWindow"
+      ).style.display = "none";
 
-      document.getElementById("notesButton").style.display =
-        "block";
+      /* Only show Notes again if logged in. */
+      if (hasLoggedInToday()) {
+
+        document.getElementById(
+          "notesButton"
+        ).style.display = "block";
+
+      } else {
+
+        document.getElementById(
+          "notesButton"
+        ).style.display = "none";
+
+      }
     }
 
 
@@ -1205,7 +1260,9 @@
     function displayChatMessage(row) {
 
       const messages =
-        document.getElementById("chatMessages");
+        document.getElementById(
+          "chatMessages"
+        );
 
       const messageDiv =
         document.createElement("div");
@@ -1231,11 +1288,17 @@
       textSpan.textContent =
         " " + row.message;
 
-      messageDiv.appendChild(userSpan);
+      messageDiv.appendChild(
+        userSpan
+      );
 
-      messageDiv.appendChild(textSpan);
+      messageDiv.appendChild(
+        textSpan
+      );
 
-      messages.appendChild(messageDiv);
+      messages.appendChild(
+        messageDiv
+      );
 
       messages.scrollTop =
         messages.scrollHeight;
@@ -1243,13 +1306,15 @@
 
 
     /* ==========================================
-       LOAD RECENT MESSAGES
+       LOAD CHAT
        ========================================== */
 
     async function loadChatMessages() {
 
       const messages =
-        document.getElementById("chatMessages");
+        document.getElementById(
+          "chatMessages"
+        );
 
       messages.innerHTML = "";
 
@@ -1270,12 +1335,15 @@
         document.getElementById(
           "chatStatus"
         ).textContent =
-          "Chat error: " + error.message;
+          "Chat error: " +
+          error.message;
 
         return;
       }
 
-      data.forEach(displayChatMessage);
+      data.forEach(
+        displayChatMessage
+      );
     }
 
 
@@ -1286,7 +1354,9 @@
     function joinChat() {
 
       const input =
-        document.getElementById("chatUsername");
+        document.getElementById(
+          "chatUsername"
+        );
 
       const name =
         input.value.trim();
@@ -1307,7 +1377,8 @@
       document.getElementById(
         "chatStatus"
       ).textContent =
-        "Joined as " + chatUsername;
+        "Joined as " +
+        chatUsername;
 
       document.getElementById(
         "chatInput"
@@ -1324,7 +1395,7 @@
 
 
     /* ==========================================
-       SWEAR WORD FILTER
+       SWEAR FILTER
        ========================================== */
 
     const SWEAR_WORDS = [
@@ -1349,33 +1420,37 @@
 
       let filtered = text;
 
-      SWEAR_WORDS.forEach(function(word) {
+      SWEAR_WORDS.forEach(
+        function(word) {
 
-        const escaped =
-          word.replace(
-            /[.*+?^${}()|[\]\\]/g,
-            "\\$&"
-          );
+          const escaped =
+            word.replace(
+              /[.*+?^${}()|[\]\\]/g,
+              "\\$&"
+            );
 
-        const regex =
-          new RegExp(
-            "\\b" + escaped + "\\b",
-            "gi"
-          );
+          const regex =
+            new RegExp(
+              "\\b" +
+              escaped +
+              "\\b",
+              "gi"
+            );
 
-        filtered =
-          filtered.replace(
-            regex,
-            "***"
-          );
-      });
+          filtered =
+            filtered.replace(
+              regex,
+              "***"
+            );
+        }
+      );
 
       return filtered;
     }
 
 
     /* ==========================================
-       SEND CHAT MESSAGE
+       SEND CHAT
        ========================================== */
 
     async function sendChatMessage() {
@@ -1385,7 +1460,9 @@
       }
 
       const input =
-        document.getElementById("chatInput");
+        document.getElementById(
+          "chatInput"
+        );
 
       const message =
         input.value.trim();
@@ -1395,8 +1472,9 @@
       }
 
       const filteredMessage =
-        filterSwearWords(message)
-          .substring(0, 500);
+        filterSwearWords(
+          message
+        ).substring(0, 500);
 
       const { error } =
         await chatSupabase
@@ -1411,7 +1489,8 @@
         document.getElementById(
           "chatStatus"
         ).textContent =
-          "Send error: " + error.message;
+          "Send error: " +
+          error.message;
 
         return;
       }
@@ -1423,7 +1502,7 @@
 
 
     /* ==========================================
-       CHAT KEYBOARD
+       CHAT KEYS
        ========================================== */
 
     document.getElementById(
@@ -1471,7 +1550,7 @@
 
 
     /* ==========================================
-       AUTO-CLEAR NOTES LOGS EVERY MINUTE
+       AUTO CLEAR CHAT EVERY MINUTE
        ========================================== */
 
     async function clearNotesLogs() {
@@ -1533,7 +1612,7 @@
 
 
     /* ==========================================
-       LOGIN SETTINGS
+       LOGIN
        ========================================== */
 
     const CORRECT_USERNAME =
@@ -1541,11 +1620,6 @@
 
     const CORRECT_PASSWORD =
       "123456";
-
-
-    /* ==========================================
-       TODAY'S DATE
-       ========================================== */
 
     function getTodayKey() {
 
@@ -1564,11 +1638,6 @@
       );
     }
 
-
-    /* ==========================================
-       LOCKED TIME
-       ========================================== */
-
     function isLockedTime() {
 
       const now = new Date();
@@ -1576,16 +1645,9 @@
       const day =
         now.getDay();
 
-      const hours =
-        now.getHours();
-
-      const minutes =
-        now.getMinutes();
-
       const currentMinutes =
-        hours * 60 + minutes;
-
-      /* Saturday and Sunday unlocked */
+        now.getHours() * 60 +
+        now.getMinutes();
 
       if (
         day === 0 ||
@@ -1593,9 +1655,6 @@
       ) {
         return false;
       }
-
-      /* Monday-Friday:
-         7:45 AM to 2:45 PM */
 
       const lockStart =
         7 * 60 + 45;
@@ -1608,11 +1667,6 @@
         currentMinutes < lockEnd
       );
     }
-
-
-    /* ==========================================
-       LOGGED IN TODAY
-       ========================================== */
 
     function hasLoggedInToday() {
 
@@ -1635,6 +1689,12 @@
           "lockScreen"
         );
 
+      /*
+        IMPORTANT:
+        Notes stays hidden unless the user
+        has logged in today.
+      */
+
       if (hasLoggedInToday()) {
 
         lockScreen.style.display =
@@ -1644,6 +1704,10 @@
 
         return;
       }
+
+      /* User has NOT logged in today. */
+
+      hideNotesAndChat();
 
       if (isLockedTime()) {
 
@@ -1655,13 +1719,12 @@
         lockScreen.style.display =
           "none";
 
-        showNotesButton();
       }
     }
 
 
     /* ==========================================
-       LOGIN
+       LOGIN BUTTON
        ========================================== */
 
     function login() {
@@ -1699,12 +1762,16 @@
         error.style.display =
           "none";
 
+        /* Notes appears ONLY after successful login. */
         showNotesButton();
 
       } else {
 
         error.style.display =
           "block";
+
+        /* Make absolutely sure Notes stays hidden. */
+        hideNotesAndChat();
       }
     }
 
@@ -1725,6 +1792,7 @@
         ) {
 
           login();
+
         }
 
       }
@@ -1807,9 +1875,9 @@
        START
        ========================================== */
 
-    loadRedirectUrl();
-
     hideNotesAndChat();
+
+    loadRedirectUrl();
 
     checkLock();
 
@@ -1834,3 +1902,4 @@
 
 </body>
 </html>
+```
