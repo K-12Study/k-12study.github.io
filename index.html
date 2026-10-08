@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Default Statcounter code for K-12 Study https://k-12study.github.io/ -->
-<script type="text/javascript">
-var sc_project=13358610; 
-var sc_invisible=1; 
-var sc_security="50d911ec"; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js" async></script>
-<noscript><div class="statcounter"><a title="Web Analytics"
-href="https://statcounter.com/" target="_blank"><img class="statcounter"
-src="https://c.statcounter.com/13358610/0/50d911ec/1/" alt="Web Analytics"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-<!-- End of Statcounter Code -->
+  <!-- Default Statcounter code for K-12 Study https://k-12study.github.io/ -->
+  <script type="text/javascript">
+    var sc_project = 13358610;
+    var sc_invisible = 1;
+    var sc_security = "50d911ec";
+  </script>
+
+  <script
+    type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js"
+    async>
+  </script>
+
+  <noscript>
+    <div class="statcounter">
+      <a
+        title="Web Analytics"
+        href="https://statcounter.com/"
+        target="_blank">
+        <img
+          class="statcounter"
+          src="https://c.statcounter.com/13358610/0/50d911ec/1/"
+          alt="Web Analytics"
+          referrerPolicy="no-referrer-when-downgrade">
+      </a>
+    </div>
+  </noscript>
+  <!-- End of Statcounter Code -->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>K-12 Study Games</title>
 
   <style>
@@ -48,7 +65,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       border-radius: 12px;
       width: 320px;
       text-align: center;
-      box-shadow: 0 5px 25px rgba(0,0,0,.6);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, .6);
     }
 
     .login-box h2 {
@@ -89,13 +106,14 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
     /* TOP BAR */
     .top-bar {
-      height: 65px;
+      min-height: 65px;
       background: #222;
       display: flex;
       align-items: center;
-      padding-left: 40px;
+      padding: 10px 20px 10px 40px;
       gap: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.5);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .5);
+      flex-wrap: wrap;
     }
 
     .top-bar a {
@@ -114,9 +132,54 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       font-weight: bold;
     }
 
+    /* REDIRECT SETTING */
+    .redirect-setting {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 20px;
+      white-space: nowrap;
+      font-size: 13px;
+      color: #ddd;
+    }
+
+    .redirect-setting input {
+      width: 240px;
+      height: 34px;
+      padding: 7px 10px;
+      border: 1px solid #555;
+      border-radius: 6px;
+      background: #333;
+      color: white;
+      outline: none;
+    }
+
+    .redirect-setting input:focus {
+      border-color: #ffd21f;
+    }
+
+    .redirect-setting button {
+      height: 34px;
+      padding: 0 12px;
+      border: none;
+      border-radius: 6px;
+      background: #ffd21f;
+      color: #111;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .redirect-setting button:hover {
+      background: #ffe45c;
+    }
+
+    #redirectStatus {
+      color: #aaa;
+      font-size: 12px;
+    }
+
     .top-right-tools {
       margin-left: auto;
-      margin-right: 20px;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -138,19 +201,22 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       height: 150px;
       background: #252525;
       border-radius: 14px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.5);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, .5);
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      transition: transform .2s, box-shadow .2s, background .2s;
+      transition:
+        transform .2s,
+        box-shadow .2s,
+        background .2s;
       overflow: hidden;
     }
 
     .game:hover {
       transform: translateY(-4px);
       background: #303030;
-      box-shadow: 0 6px 18px rgba(0,0,0,.7);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .7);
     }
 
     .game img {
@@ -178,7 +244,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       background: #000;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 30px rgba(0,0,0,.8);
+      box-shadow: 0 0 30px rgba(0, 0, 0, .8);
       display: flex;
       flex-direction: column;
     }
@@ -218,7 +284,6 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     }
 
     /* NOTES CHAT */
-
     #notesButton {
       position: fixed;
       right: 15px;
@@ -232,7 +297,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       font-size: 14px;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 3px 12px rgba(0,0,0,.45);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, .45);
       display: none;
     }
 
@@ -249,7 +314,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       background: #222;
       border: 1px solid #444;
       border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.7);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .7);
       z-index: 10002;
       display: none;
       overflow: hidden;
@@ -350,13 +415,11 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       font-size: 12px;
     }
 
-
     /* CHAT PASSWORD LOCK */
-
     #chatLock {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.72);
+      background: rgba(0, 0, 0, .72);
       display: none;
       justify-content: center;
       align-items: center;
@@ -370,7 +433,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       border-radius: 12px;
       padding: 24px;
       text-align: center;
-      box-shadow: 0 8px 30px rgba(0,0,0,.7);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .7);
     }
 
     .chat-lock-box h2 {
@@ -425,20 +488,6 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       margin-bottom: 10px;
     }
 
-    @media (max-width: 600px) {
-      #chatWindow {
-        right: 10px;
-        bottom: 10px;
-        width: calc(100vw - 20px);
-        height: 70vh;
-      }
-
-      #notesButton {
-        right: 10px;
-        bottom: 10px;
-      }
-    }
-
     /* MOBILE */
     @media (max-width: 900px) {
       .games-grid {
@@ -448,8 +497,22 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
     @media (max-width: 600px) {
       .top-bar {
-        padding-left: 20px;
-        gap: 10px;
+        padding: 15px 20px;
+      }
+
+      .redirect-setting {
+        width: 100%;
+        margin-left: 0;
+        white-space: normal;
+        flex-wrap: wrap;
+      }
+
+      .redirect-setting input {
+        width: 200px;
+      }
+
+      .top-right-tools {
+        margin-left: 0;
       }
 
       .games-area {
@@ -469,6 +532,18 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
         width: 95vw;
         height: 90vh;
       }
+
+      #chatWindow {
+        right: 10px;
+        bottom: 10px;
+        width: calc(100vw - 20px);
+        height: 70vh;
+      }
+
+      #notesButton {
+        right: 10px;
+        bottom: 10px;
+      }
     }
   </style>
 </head>
@@ -483,14 +558,12 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       <input
         type="text"
         id="username"
-        placeholder="Username"
-      >
+        placeholder="Username">
 
       <input
         type="password"
         id="password"
-        placeholder="Password"
-      >
+        placeholder="Password">
 
       <button onclick="login()">Login</button>
 
@@ -500,7 +573,6 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     </div>
   </div>
 
-
   <!-- TOP BAR -->
   <div class="top-bar">
 
@@ -508,43 +580,64 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       <img
         class="logo"
         src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/favicon.ico"
-        alt="K-12 Study"
-      >
+        alt="K-12 Study">
     </a>
 
     <a
       class="site-name"
-      href="https://k-12study.github.io"
-    >
+      href="https://k-12study.github.io">
       K-12 Study
     </a>
 
     <a
       href="https://k-12study.github.io/contact-us"
-      style="margin-left: 20px;"
-    >
+      style="margin-left: 20px;">
       Submit a request
     </a>
 
+    <!-- CTRL + Z REDIRECT SETTING -->
+    <div class="redirect-setting">
+
+      <span>
+        Set site to redirect to when pressing Ctrl + Z:
+      </span>
+
+      <input
+        type="text"
+        id="redirectUrl"
+        placeholder="https://example.com"
+        autocomplete="off">
+
+      <button
+        type="button"
+        onclick="saveRedirectUrl()">
+        Save
+      </button>
+
+      <span id="redirectStatus"></span>
+
+    </div>
+
+    <!-- VISITOR COUNTER -->
     <div class="top-right-tools">
       <div align="center">
+
         <a href="https://www.counter12.com">
           <img
             src="https://www.counter12.com/img-452Zc4dZ1zw7cd23-9.gif"
             border="0"
-            alt="free web counter"
-          >
+            alt="free web counter">
         </a>
 
         <script
           type="text/javascript"
           src="https://www.counter12.com/ad.js?id=452Zc4dZ1zw7cd23">
         </script>
+
       </div>
     </div>
 
   </div>
-
 
   <!-- GAMES -->
   <main class="games-area">
@@ -557,50 +650,49 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       <div
         class="game"
         onclick="openGame('https://lolygames.github.io/gd-lit')"
-        title="Geometry Dash"
-      >
+        title="Geometry Dash">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Geometry_Dash_Icon.png"
-          alt="Geometry Dash"
-        >
+          alt="Geometry Dash">
+
       </div>
 
       <!-- Baldi's Basics -->
       <div
         class="game"
         onclick="openGame('https://the-pizza-editionfree.github.io/lesson305/lesson-412/')"
-        title="Baldi's Basics"
-      >
+        title="Baldi's Basics">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/unnamed.png"
-          alt="Baldi's Basics"
-        >
+          alt="Baldi's Basics">
+
       </div>
 
       <!-- Paper.io 2 -->
       <div
         class="game"
         onclick="openGame('https://paperio.site/')"
-        title="Paper.io 2"
-      >
+        title="Paper.io 2">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/images.jpeg"
-          alt="Paper.io 2"
-        >
+          alt="Paper.io 2">
+
       </div>
 
       <!-- Retro Bowl College -->
       <div
         class="game"
         onclick="openGame('https://classroomjq.github.io/retro-bowl-college/')"
-        title="Retro Bowl College"
-      >
+        title="Retro Bowl College">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/unnamed%20(1).png"
-          alt="Retro Bowl College"
-        >
-      </div>
+          alt="Retro Bowl College">
 
+      </div>
 
       <!-- ROW 2 -->
 
@@ -608,50 +700,49 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       <div
         class="game"
         onclick="openGame('https://baldis-basics-online.github.io/g26/class-444/')"
-        title="Subway Surfers"
-      >
+        title="Subway Surfers">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Subway%20Surfers.png"
-          alt="Subway Surfers"
-        >
+          alt="Subway Surfers">
+
       </div>
 
       <!-- Minecraft -->
       <div
         class="game"
         onclick="openGame('https://k-12study.github.io/minecraft')"
-        title="Minecraft"
-      >
+        title="Minecraft">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/8C727C19-4E53-440A-9F23-861871A45931.png"
-          alt="Minecraft"
-        >
+          alt="Minecraft">
+
       </div>
 
       <!-- Block Blast -->
       <div
         class="game"
         onclick="openGame('https://cbgamesdev.github.io/chilibowlflash/blockblast/index.html')"
-        title="Block Blast"
-      >
+        title="Block Blast">
+
         <img
           src="https://play-lh.googleusercontent.com/5FLR-EBlfNvoV9ydZkOMDqRF10nV64XcKdZzW_oQzmz2e8Me9PS5Zncnvviki0J3XumjO2a_lg6_IdwOqwnV"
-          alt="Block Blast"
-        >
+          alt="Block Blast">
+
       </div>
 
       <!-- Retro Bowl -->
       <div
         class="game"
         onclick="openGame('https://game316009.konggames.com/gamez/0031/6009/live/index.html')"
-        title="Retro Bowl"
-      >
+        title="Retro Bowl">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/unnamed%20(2).png"
-          alt="Retro Bowl"
-        >
-      </div>
+          alt="Retro Bowl">
 
+      </div>
 
       <!-- ROW 3 -->
 
@@ -659,168 +750,307 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       <div
         class="game"
         onclick="openGame('https://stickman.pro/iframe/')"
-        title="Stickman Hook"
-      >
+        title="Stickman Hook">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Stickman%20Hook.jpeg"
-          alt="Stickman Hook"
-        >
+          alt="Stickman Hook">
+
       </div>
 
       <!-- Run 3 -->
       <div
         class="game"
         onclick="openGame('https://chompypotato.github.io/run3/')"
-        title="Run 3"
-      >
+        title="Run 3">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/RunMobile_Icon_IOS.png"
-          alt="Run 3"
-        >
+          alt="Run 3">
+
       </div>
 
       <!-- Football Bros -->
       <div
         class="game"
         onclick="openGame('https://footballbros.io/')"
-        title="Football Bros"
-      >
+        title="Football Bros">
+
         <img
           src="https://raw.githubusercontent.com/K-12Study/k-12study.github.io/refs/heads/main/images/Football%20Bros.png"
-          alt="Football Bros"
-        >
+          alt="Football Bros">
+
       </div>
 
       <!-- Tomb of the Mask -->
       <div
         class="game"
         onclick="openGame('https://baldis-basics-online.github.io/g26/class-438/')"
-        title="Tomb of the Mask"
-      >
+        title="Tomb of the Mask">
+
         <img
           src="https://baldis-basics-online.github.io/img/class-438.png"
-          alt="Tomb of the Mask"
-        >
+          alt="Tomb of the Mask">
+
       </div>
 
     </div>
 
   </main>
 
-
   <!-- NOTES BUTTON -->
-  <button id="notesButton" type="button" onclick="openNotes()">
+  <button
+    id="notesButton"
+    type="button"
+    onclick="openNotes()">
     Notes
   </button>
 
   <!-- NOTES CHAT -->
   <div id="chatWindow">
+
     <div class="chat-header">
-      <span>I am not responsible for anyone using this out of school hours.</span>
-      <button class="chat-close" type="button" onclick="closeNotes()">×</button>
+      <span>
+        I am not responsible for anyone using this out of school hours.
+      </span>
+
+      <button
+        class="chat-close"
+        type="button"
+        onclick="closeNotes()">
+        ×
+      </button>
     </div>
 
-    <div id="chatMessages" class="chat-messages"></div>
+    <div
+      id="chatMessages"
+      class="chat-messages">
+    </div>
 
     <div class="chat-join">
+
       <input
         id="chatUsername"
         type="text"
         maxlength="30"
-        placeholder="Your username"
-      >
-      <button type="button" onclick="joinChat()">Join</button>
+        placeholder="Your username">
+
+      <button
+        type="button"
+        onclick="joinChat()">
+        Join
+      </button>
+
     </div>
 
-    <div id="chatStatus" class="chat-status">
+    <div
+      id="chatStatus"
+      class="chat-status">
       Enter a username to join the chat.
     </div>
 
     <div class="chat-input-row">
+
       <input
         id="chatInput"
         class="chat-input"
         type="text"
         maxlength="500"
         placeholder="Type a message..."
-        disabled
-      >
+        disabled>
+
       <button
         id="chatSend"
         class="chat-send"
         type="button"
         onclick="sendChatMessage()"
-        disabled
-      >
+        disabled>
         Send
       </button>
+
     </div>
+
   </div>
-
-
-
 
   <!-- CHAT PASSWORD LOCK -->
   <div id="chatLock">
+
     <div class="chat-lock-box">
+
       <h2>Type "ok" to proceed.</h2>
-      <p>By typing "ok", you agree that the creator of this website does not take any responsibility for any students using this during school hours.</p>
+
+      <p>
+        By typing "ok", you agree that the creator of this website does not take any responsibility for any students using this during school hours.
+      </p>
 
       <input
         id="chatPassword"
         type="password"
         placeholder="ok"
-        autocomplete="off"
-      >
+        autocomplete="off">
 
-      <div id="chatLockError">Please type "ok"</div>
+      <div id="chatLockError">
+        Please type "ok"
+      </div>
 
       <div class="chat-lock-buttons">
-        <button id="chatUnlockButton" type="button" onclick="unlockChat()">Unlock</button>
-        <button id="chatCancelButton" type="button" onclick="cancelChatUnlock()">Cancel</button>
-      </div>
-    </div>
-  </div>
 
+        <button
+          id="chatUnlockButton"
+          type="button"
+          onclick="unlockChat()">
+          Unlock
+        </button>
+
+        <button
+          id="chatCancelButton"
+          type="button"
+          onclick="cancelChatUnlock()">
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
 
   <!-- GAME OVERLAY -->
   <div
     class="game-overlay"
     id="gameOverlay"
-    onclick="closeGame(event)"
-  >
+    onclick="closeGame(event)">
 
     <div
       class="game-window"
-      onclick="event.stopPropagation()"
-    >
+      onclick="event.stopPropagation()">
 
       <div class="game-header">
+
         <button
           class="close-button"
-          onclick="closeGame()"
-        >
+          onclick="closeGame()">
           ×
         </button>
+
       </div>
 
       <iframe
         id="gameFrame"
         src=""
-        allowfullscreen
-      ></iframe>
+        allowfullscreen>
+      </iframe>
 
     </div>
 
   </div>
-
 
   <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
 
-    /* SUPABASE CHAT SETTINGS */
+    /* ==========================================
+       CTRL + Z REDIRECT
+       ========================================== */
+
+    const REDIRECT_STORAGE_KEY = "k12RedirectUrl";
+
+    function saveRedirectUrl() {
+
+      const input = document.getElementById("redirectUrl");
+      const status = document.getElementById("redirectStatus");
+
+      let url = input.value.trim();
+
+      if (!url) {
+        localStorage.removeItem(REDIRECT_STORAGE_KEY);
+        status.textContent = "Cleared";
+        return;
+      }
+
+      if (
+        !url.startsWith("http://") &&
+        !url.startsWith("https://")
+      ) {
+        url = "https://" + url;
+      }
+
+      try {
+        new URL(url);
+      } catch (error) {
+        status.textContent = "Invalid URL";
+        return;
+      }
+
+      localStorage.setItem(
+        REDIRECT_STORAGE_KEY,
+        url
+      );
+
+      input.value = url;
+      status.textContent = "Saved";
+    }
+
+    function loadRedirectUrl() {
+
+      const savedUrl =
+        localStorage.getItem(REDIRECT_STORAGE_KEY);
+
+      if (savedUrl) {
+        document.getElementById("redirectUrl").value =
+          savedUrl;
+      }
+    }
+
+    function redirectWithCtrlZ() {
+
+      const savedUrl =
+        localStorage.getItem(REDIRECT_STORAGE_KEY);
+
+      if (!savedUrl) {
+        return;
+      }
+
+      window.location.href = savedUrl;
+    }
+
+    /* CTRL + Z */
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.ctrlKey &&
+          event.key.toLowerCase() === "z"
+        ) {
+
+          event.preventDefault();
+
+          redirectWithCtrlZ();
+
+        }
+
+      }
+    );
+
+    /* Save URL when Enter is pressed */
+    document.getElementById("redirectUrl")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+            saveRedirectUrl();
+          }
+
+        }
+      );
+
+
+    /* ==========================================
+       SUPABASE CHAT SETTINGS
+       ========================================== */
 
     const SUPABASE_URL =
       "https://adhibemripimpfhmyxzr.supabase.co";
@@ -834,79 +1064,143 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
         SUPABASE_KEY
       );
 
-
     let chatUsername = "";
 
 
-    /* NOTES VISIBILITY */
+    /* ==========================================
+       NOTES VISIBILITY
+       ========================================== */
 
     function showNotesButton() {
-      document.getElementById("notesButton").style.display = "block";
+      document.getElementById("notesButton").style.display =
+        "block";
     }
 
     function hideNotesAndChat() {
-      document.getElementById("notesButton").style.display = "none";
-      document.getElementById("chatWindow").style.display = "none";
+      document.getElementById("notesButton").style.display =
+        "none";
+
+      document.getElementById("chatWindow").style.display =
+        "none";
     }
 
     function isChatLockedTime() {
+
       const now = new Date();
+
       const day = now.getDay();
-      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+      const currentMinutes =
+        now.getHours() * 60 +
+        now.getMinutes();
 
       if (day === 0 || day === 6) {
         return false;
       }
 
-      const lockStart = 7 * 60 + 45;
-      const lockEnd = 14 * 60 + 45;
+      const lockStart =
+        7 * 60 + 45;
 
-      return currentMinutes >= lockStart && currentMinutes < lockEnd;
+      const lockEnd =
+        14 * 60 + 45;
+
+      return (
+        currentMinutes >= lockStart &&
+        currentMinutes < lockEnd
+      );
     }
 
     function openNotes() {
-      if (isChatLockedTime() && sessionStorage.getItem("chatUnlocked") !== "true") {
-        document.getElementById("chatLock").style.display = "flex";
-        document.getElementById("chatPassword").value = "";
-        document.getElementById("chatLockError").style.display = "none";
-        setTimeout(() => document.getElementById("chatPassword").focus(), 50);
+
+      if (
+        isChatLockedTime() &&
+        sessionStorage.getItem("chatUnlocked") !== "true"
+      ) {
+
+        document.getElementById("chatLock").style.display =
+          "flex";
+
+        document.getElementById("chatPassword").value =
+          "";
+
+        document.getElementById("chatLockError").style.display =
+          "none";
+
+        setTimeout(function() {
+          document.getElementById("chatPassword").focus();
+        }, 50);
+
         return;
       }
 
-      document.getElementById("chatLock").style.display = "none";
-      document.getElementById("notesButton").style.display = "none";
-      document.getElementById("chatWindow").style.display = "flex";
+      document.getElementById("chatLock").style.display =
+        "none";
+
+      document.getElementById("notesButton").style.display =
+        "none";
+
+      document.getElementById("chatWindow").style.display =
+        "flex";
+
       document.getElementById("chatUsername").focus();
+
       loadChatMessages();
     }
 
     function unlockChat() {
-      const password = document.getElementById("chatPassword").value;
-      const error = document.getElementById("chatLockError");
+
+      const password =
+        document.getElementById("chatPassword").value;
+
+      const error =
+        document.getElementById("chatLockError");
 
       if (password === "ok") {
-        sessionStorage.setItem("chatUnlocked", "true");
+
+        sessionStorage.setItem(
+          "chatUnlocked",
+          "true"
+        );
+
         error.style.display = "none";
-        document.getElementById("chatLock").style.display = "none";
+
+        document.getElementById("chatLock").style.display =
+          "none";
+
         openNotes();
+
       } else {
+
         error.style.display = "block";
+
       }
     }
 
     function cancelChatUnlock() {
-      document.getElementById("chatLock").style.display = "none";
-      document.getElementById("chatPassword").value = "";
-      document.getElementById("chatLockError").style.display = "none";
+
+      document.getElementById("chatLock").style.display =
+        "none";
+
+      document.getElementById("chatPassword").value =
+        "";
+
+      document.getElementById("chatLockError").style.display =
+        "none";
     }
 
     function closeNotes() {
-      document.getElementById("chatWindow").style.display = "none";
-      document.getElementById("notesButton").style.display = "block";
+
+      document.getElementById("chatWindow").style.display =
+        "none";
+
+      document.getElementById("notesButton").style.display =
+        "block";
     }
 
 
-    /* DISPLAY CHAT MESSAGE */
+    /* ==========================================
+       DISPLAY CHAT MESSAGE
+       ========================================== */
 
     function displayChatMessage(row) {
 
@@ -916,30 +1210,41 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       const messageDiv =
         document.createElement("div");
 
-      messageDiv.className = "chat-message";
+      messageDiv.className =
+        "chat-message";
 
       const userSpan =
         document.createElement("span");
 
-      userSpan.className = "chat-message-user";
-      userSpan.textContent = row.username + ":";
+      userSpan.className =
+        "chat-message-user";
+
+      userSpan.textContent =
+        row.username + ":";
 
       const textSpan =
         document.createElement("span");
 
-      textSpan.className = "chat-message-text";
-      textSpan.textContent = " " + row.message;
+      textSpan.className =
+        "chat-message-text";
+
+      textSpan.textContent =
+        " " + row.message;
 
       messageDiv.appendChild(userSpan);
+
       messageDiv.appendChild(textSpan);
 
       messages.appendChild(messageDiv);
 
-      messages.scrollTop = messages.scrollHeight;
+      messages.scrollTop =
+        messages.scrollHeight;
     }
 
 
-    /* LOAD RECENT MESSAGES */
+    /* ==========================================
+       LOAD RECENT MESSAGES
+       ========================================== */
 
     async function loadChatMessages() {
 
@@ -951,13 +1256,20 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       const { data, error } =
         await chatSupabase
           .from("messages")
-          .select("id, username, message, created_at")
-          .order("created_at", { ascending: true })
+          .select(
+            "id, username, message, created_at"
+          )
+          .order(
+            "created_at",
+            { ascending: true }
+          )
           .limit(100);
 
       if (error) {
 
-        document.getElementById("chatStatus").textContent =
+        document.getElementById(
+          "chatStatus"
+        ).textContent =
           "Chat error: " + error.message;
 
         return;
@@ -967,7 +1279,9 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     }
 
 
-    /* JOIN CHAT */
+    /* ==========================================
+       JOIN CHAT
+       ========================================== */
 
     function joinChat() {
 
@@ -979,25 +1293,39 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
       if (!name) {
 
-        document.getElementById("chatStatus").textContent =
+        document.getElementById(
+          "chatStatus"
+        ).textContent =
           "Please enter a username.";
 
         return;
       }
 
-      chatUsername = name.substring(0, 30);
+      chatUsername =
+        name.substring(0, 30);
 
-      document.getElementById("chatStatus").textContent =
+      document.getElementById(
+        "chatStatus"
+      ).textContent =
         "Joined as " + chatUsername;
 
-      document.getElementById("chatInput").disabled = false;
-      document.getElementById("chatSend").disabled = false;
+      document.getElementById(
+        "chatInput"
+      ).disabled = false;
 
-      document.getElementById("chatInput").focus();
+      document.getElementById(
+        "chatSend"
+      ).disabled = false;
+
+      document.getElementById(
+        "chatInput"
+      ).focus();
     }
 
 
-    /* SWEAR WORD FILTER */
+    /* ==========================================
+       SWEAR WORD FILTER
+       ========================================== */
 
     const SWEAR_WORDS = [
       "fuck",
@@ -1018,25 +1346,37 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     ];
 
     function filterSwearWords(text) {
+
       let filtered = text;
 
       SWEAR_WORDS.forEach(function(word) {
-        const pattern = word
-          .split("")
-          .map(function(letter) {
-            return letter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-          })
-          .join("\\W*");
 
-        const regex = new RegExp("\\b" + pattern + "\\b", "gi");
-        filtered = filtered.replace(regex, "***");
+        const escaped =
+          word.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+          );
+
+        const regex =
+          new RegExp(
+            "\\b" + escaped + "\\b",
+            "gi"
+          );
+
+        filtered =
+          filtered.replace(
+            regex,
+            "***"
+          );
       });
 
       return filtered;
     }
 
 
-    /* SEND CHAT MESSAGE */
+    /* ==========================================
+       SEND CHAT MESSAGE
+       ========================================== */
 
     async function sendChatMessage() {
 
@@ -1055,7 +1395,8 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       }
 
       const filteredMessage =
-        filterSwearWords(message).substring(0, 500);
+        filterSwearWords(message)
+          .substring(0, 500);
 
       const { error } =
         await chatSupabase
@@ -1067,73 +1408,109 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
       if (error) {
 
-        document.getElementById("chatStatus").textContent =
+        document.getElementById(
+          "chatStatus"
+        ).textContent =
           "Send error: " + error.message;
 
         return;
       }
 
       input.value = "";
+
       input.focus();
     }
 
 
-    document.getElementById("chatPassword")
-      .addEventListener("keydown", function(event) {
+    /* ==========================================
+       CHAT KEYBOARD
+       ========================================== */
+
+    document.getElementById(
+      "chatPassword"
+    ).addEventListener(
+      "keydown",
+      function(event) {
+
         if (event.key === "Enter") {
           unlockChat();
         }
+
         if (event.key === "Escape") {
           cancelChatUnlock();
         }
-      });
 
+      }
+    );
 
-    /* ENTER KEY FOR CHAT */
-
-    document.getElementById("chatUsername")
-      .addEventListener("keydown", function(event) {
+    document.getElementById(
+      "chatUsername"
+    ).addEventListener(
+      "keydown",
+      function(event) {
 
         if (event.key === "Enter") {
           joinChat();
         }
 
-      });
+      }
+    );
 
-    document.getElementById("chatInput")
-      .addEventListener("keydown", function(event) {
+    document.getElementById(
+      "chatInput"
+    ).addEventListener(
+      "keydown",
+      function(event) {
 
         if (event.key === "Enter") {
           sendChatMessage();
         }
 
-      });
+      }
+    );
 
 
-    /* AUTO-CLEAR NOTES LOGS EVERY MINUTE */
+    /* ==========================================
+       AUTO-CLEAR NOTES LOGS EVERY MINUTE
+       ========================================== */
 
     async function clearNotesLogs() {
 
-      const { error } = await chatSupabase
-        .from("messages")
-        .delete()
-        .not("id", "is", null);
+      const { error } =
+        await chatSupabase
+          .from("messages")
+          .delete()
+          .not("id", "is", null);
 
       if (error) {
-        console.error("Automatic notes cleanup error:", error.message);
+
+        console.error(
+          "Automatic notes cleanup error:",
+          error.message
+        );
+
         return;
       }
 
-      const messages = document.getElementById("chatMessages");
+      const messages =
+        document.getElementById(
+          "chatMessages"
+        );
+
       if (messages) {
         messages.innerHTML = "";
       }
     }
 
-    /* Run once every 60 seconds */
-    setInterval(clearNotesLogs, 60000);
+    setInterval(
+      clearNotesLogs,
+      60000
+    );
 
-    /* REALTIME CHAT */
+
+    /* ==========================================
+       REALTIME CHAT
+       ========================================== */
 
     chatSupabase
       .channel("public-messages")
@@ -1146,20 +1523,29 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
         },
         function(payload) {
 
-          displayChatMessage(payload.new);
+          displayChatMessage(
+            payload.new
+          );
 
         }
       )
       .subscribe();
 
 
-    /* LOGIN SETTINGS */
+    /* ==========================================
+       LOGIN SETTINGS
+       ========================================== */
 
-    const CORRECT_USERNAME = "admin";
-    const CORRECT_PASSWORD = "123456";
+    const CORRECT_USERNAME =
+      "admin";
+
+    const CORRECT_PASSWORD =
+      "123456";
 
 
-    /* TODAY'S DATE */
+    /* ==========================================
+       TODAY'S DATE
+       ========================================== */
 
     function getTodayKey() {
 
@@ -1168,36 +1554,45 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       return (
         now.getFullYear() +
         "-" +
-        String(now.getMonth() + 1).padStart(2, "0") +
+        String(
+          now.getMonth() + 1
+        ).padStart(2, "0") +
         "-" +
-        String(now.getDate()).padStart(2, "0")
+        String(
+          now.getDate()
+        ).padStart(2, "0")
       );
-
     }
 
 
-    /* LOCKED TIME */
+    /* ==========================================
+       LOCKED TIME
+       ========================================== */
 
     function isLockedTime() {
 
       const now = new Date();
 
-      const day = now.getDay();
+      const day =
+        now.getDay();
 
-      const hours = now.getHours();
+      const hours =
+        now.getHours();
 
-      const minutes = now.getMinutes();
+      const minutes =
+        now.getMinutes();
 
       const currentMinutes =
         hours * 60 + minutes;
 
-
       /* Saturday and Sunday unlocked */
 
-      if (day === 0 || day === 6) {
+      if (
+        day === 0 ||
+        day === 6
+      ) {
         return false;
       }
-
 
       /* Monday-Friday:
          7:45 AM to 2:45 PM */
@@ -1208,71 +1603,83 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       const lockEnd =
         14 * 60 + 45;
 
-
       return (
         currentMinutes >= lockStart &&
         currentMinutes < lockEnd
       );
-
     }
 
 
-    /* LOGGED IN TODAY */
+    /* ==========================================
+       LOGGED IN TODAY
+       ========================================== */
 
     function hasLoggedInToday() {
 
       return (
-        localStorage.getItem("k12LoginDate") ===
-        getTodayKey()
+        localStorage.getItem(
+          "k12LoginDate"
+        ) === getTodayKey()
       );
-
     }
 
 
-    /* CHECK LOCK */
+    /* ==========================================
+       CHECK LOCK
+       ========================================== */
 
     function checkLock() {
 
       const lockScreen =
-        document.getElementById("lockScreen");
-
+        document.getElementById(
+          "lockScreen"
+        );
 
       if (hasLoggedInToday()) {
 
-        lockScreen.style.display = "none";
+        lockScreen.style.display =
+          "none";
+
         showNotesButton();
 
         return;
       }
 
-
       if (isLockedTime()) {
 
-        lockScreen.style.display = "flex";
+        lockScreen.style.display =
+          "flex";
 
       } else {
 
-        lockScreen.style.display = "none";
+        lockScreen.style.display =
+          "none";
+
         showNotesButton();
-
       }
-
     }
 
 
-    /* LOGIN */
+    /* ==========================================
+       LOGIN
+       ========================================== */
 
     function login() {
 
       const username =
-        document.getElementById("username").value;
+        document.getElementById(
+          "username"
+        ).value;
 
       const password =
-        document.getElementById("password").value;
+        document.getElementById(
+          "password"
+        ).value;
 
       const error =
-        document.getElementById("loginError");
-
+        document.getElementById(
+          "loginError"
+        );
 
       if (
         username === CORRECT_USERNAME &&
@@ -1286,21 +1693,25 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
         document.getElementById(
           "lockScreen"
-        ).style.display = "none";
+        ).style.display =
+          "none";
 
-        error.style.display = "none";
+        error.style.display =
+          "none";
+
         showNotesButton();
 
       } else {
 
-        error.style.display = "block";
-
+        error.style.display =
+          "block";
       }
-
     }
 
 
-    /* ENTER KEY LOGIN */
+    /* ==========================================
+       ENTER KEY LOGIN
+       ========================================== */
 
     document.addEventListener(
       "keydown",
@@ -1308,89 +1719,116 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
         if (
           event.key === "Enter" &&
-          document.getElementById("lockScreen").style.display === "flex"
+          document.getElementById(
+            "lockScreen"
+          ).style.display === "flex"
         ) {
 
           login();
-
         }
 
       }
     );
 
 
-    /* OPEN GAME */
+    /* ==========================================
+       OPEN GAME
+       ========================================== */
 
     function openGame(url) {
 
       const overlay =
-        document.getElementById("gameOverlay");
+        document.getElementById(
+          "gameOverlay"
+        );
 
       const iframe =
-        document.getElementById("gameFrame");
+        document.getElementById(
+          "gameFrame"
+        );
 
       iframe.src = url;
 
-      overlay.style.display = "flex";
-
+      overlay.style.display =
+        "flex";
     }
 
 
-    /* CLOSE GAME */
+    /* ==========================================
+       CLOSE GAME
+       ========================================== */
 
     function closeGame(event) {
 
       if (
         event &&
         event.target !==
-        document.getElementById("gameOverlay")
+        document.getElementById(
+          "gameOverlay"
+        )
       ) {
-
         return;
-
       }
 
       const overlay =
-        document.getElementById("gameOverlay");
+        document.getElementById(
+          "gameOverlay"
+        );
 
       const iframe =
-        document.getElementById("gameFrame");
+        document.getElementById(
+          "gameFrame"
+        );
 
       iframe.src = "";
 
-      overlay.style.display = "none";
-
+      overlay.style.display =
+        "none";
     }
 
 
-    /* ESCAPE CLOSES GAME */
+    /* ==========================================
+       ESCAPE CLOSES GAME
+       ========================================== */
 
     document.addEventListener(
       "keydown",
       function(event) {
 
         if (event.key === "Escape") {
-
           closeGame();
-
         }
 
       }
     );
 
 
-    /* START LOCK CHECK */
+    /* ==========================================
+       START
+       ========================================== */
+
+    loadRedirectUrl();
 
     hideNotesAndChat();
+
     checkLock();
 
-    setInterval(function() {
-      checkLock();
+    setInterval(
+      function() {
 
-      if (!isChatLockedTime()) {
-        sessionStorage.removeItem("chatUnlocked");
-      }
-    }, 30000);
+        checkLock();
+
+        if (!isChatLockedTime()) {
+
+          sessionStorage.removeItem(
+            "chatUnlocked"
+          );
+
+        }
+
+      },
+      30000
+    );
 
   </script>
 
